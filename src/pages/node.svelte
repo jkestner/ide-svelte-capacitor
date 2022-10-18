@@ -1,8 +1,6 @@
 <script>
-  import NodeList from "@components/NodeList.svelte";
-  import RuleList from "@components/RuleList.svelte";
-  //   import App from "src/App.svelte";
-  import Index from "./index.svelte";
+  import NodeDetail from "@components/NodeDetail.svelte";
+  import { params } from "@roxi/routify";
 
   let nodes = [
     { id: "1", name: "Garden", temperature: 72, humidity: 40, light: 4000 },
@@ -29,27 +27,20 @@
       lastOutput: "turned on port 1",
     },
   ];
+
+  function nodes_filtered() {
+    if ($params.id) {
+      let b = nodes.find((n) => {
+        return n.id === $params.id;
+      });
+      console.log(b);
+      return [b];
+    } else return nodes;
+  }
 </script>
 
-<div class="main">
-  <h2 class="text-2xl font-bold m-1">Everything</h2>
-
-  <div class="tabs tabs-boxed">
-    <a class="tab tab-active" href="node">Nodes</a>
-    <a class="tab" href="rule">Rules</a>
-    <a class="tab">Map</a>
-  </div>
-
-  <h3 class="text-xl">Nodes</h3>
-  <NodeList {nodes} />
-
-  <h3 class="text-xl">Rules</h3>
-  <RuleList {rules} />
+<div class="container">
+  {#each nodes_filtered() as node}
+    <NodeDetail {node} />
+  {/each}
 </div>
-
-<style>
-  .main {
-    text-align: center;
-    margin: 50px auto;
-  }
-</style>

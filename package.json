@@ -24,16 +24,22 @@
   "devDependencies": {
     "@roxi/routify": "^2.18.0",
     "@sveltejs/vite-plugin-svelte": "*",
+    "@tailwindcss/typography": "^0.5.7",
     "@tsconfig/svelte": "^1.0.10",
+    "@types/pouchdb": "^6.4.0",
+    "autoprefixer": "^10.4.11",
     "cordova-res": "^0.15.4",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.16",
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
     "svelte": "^3.37.0",
     "svelte-preprocess": "^4.7.3",
+    "svelte-time": "^0.7.1",
+    "tailwindcss": "^3.1.8",
     "typescript": "^4.2.4",
-    "vite": "^2.2.3",
+    "vite": "^3.0.0",
     "vite-aliases": "^0.6.3",
     "vite-plugin-compression": "^0.2.5",
     "vite-tsconfig-paths": "^3.3.10"
@@ -42,6 +48,9 @@
     "@capacitor/android": "^3.0.1",
     "@capacitor/cli": "^3.0.0",
     "@capacitor/core": "^3.0.0",
-    "@capacitor/ios": "^3.0.1"
+    "@capacitor/ios": "^3.8.0",
+    "daisyui": "^2.28.0",
+    "pouchdb": "^7.3.0",
+    "svelte-icons": "^2.1.0"
   }
 }

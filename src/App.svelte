@@ -1,10 +1,19 @@
-<script lang="typescript">
-	import { Router } from "@roxi/routify";
-	import { routes } from "../.routify/routes";
+<script lang="ts">
+  import { Router } from "@roxi/routify";
+  import { onMount } from "svelte";
+  import { routes } from "../.routify/routes";
+  import * as state from "@store/program.js";
+  import { fade } from "svelte/transition";
+
+  onMount(async () => {
+    // try {
+    //   let db = new PouchDB("Programs");
+    //   if (db) console.log("destroy db: ", await db.destroy());
+    // } catch {}
+
+    console.log("boot db");
+    await state.boot(new PouchDB("Programs"));
+  });
 </script>
 
 <Router {routes} />
-
-<style @global>
-
-</style>
