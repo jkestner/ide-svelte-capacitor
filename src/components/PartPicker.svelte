@@ -50,7 +50,7 @@
   {:else}
     <div class="chooser flex items-baseline">
       <select
-        class="select bg-accent text-accent-content text-xl"
+        class="select  bg-accent text-accent-content"
         bind:value
         placeholder="command"
         color="accent"
@@ -63,7 +63,7 @@
       </select>
       {#if selected().component}
         <!-- <div>{selected().component}</div> -->
-        <div>summary</div>
+        <!-- <div>summary</div> -->
       {/if}
     </div>
   {/if}

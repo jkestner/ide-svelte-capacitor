@@ -5,6 +5,7 @@
   import { slide } from "svelte/transition";
 
   export let action;
+  export let summarize;
 
   async function removeCommand(command) {
     //todo: make sure this is a unique item with a key
@@ -16,9 +17,16 @@
 
 {#if action}
   {#each action.commands as command}
-    <div class="flex items-stretch group" transition:slide={{ duration: 100 }}>
-      <Command {command} />
-      <RemoveButton remove={() => removeCommand(command)} />
-    </div>
+    {#if summarize}
+      <div>{command.command}</div>
+    {:else}
+      <div
+        class="flex items-stretch group"
+        transition:slide={{ duration: 100 }}
+      >
+        <Command {command} {summarize} />
+        <RemoveButton remove={() => removeCommand(command)} />
+      </div>
+    {/if}
   {/each}
 {/if}

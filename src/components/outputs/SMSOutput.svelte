@@ -3,31 +3,38 @@
   import VariableInserter from "@components/VariableInserter.svelte";
 
   export let params = [];
+  let to = "";
+  let content = "";
 
   export function summary() {
-    return "temp, light";
+    return "email@address";
   }
   function test() {
-    console.log("testing log");
+    console.log("testing email to " + to);
   }
 </script>
 
 <Output {test} {summary}>
   <div class="form-control">
     <label class="input-group">
-      <span>Where</span>
-      <input type="text" placeholder="dashboard" class="input input-bordered" />
-      dashboard, or a csv file (where?) or google spreadsheet or
+      <span>To</span>
+      <input
+        type="text"
+        placeholder="512-555-1111"
+        class="input input-bordered"
+        bind:value={to}
+      />
     </label>
   </div>
 
   <div class="form-control indicator">
     <label class="input-group">
-      <span>Body</span>
+      <span>Content</span>
       <textarea
         type="text"
-        placeholder="info@site.com"
+        placeholder="content"
         class="textarea textarea-bordered"
+        bind:value={content}
       />
     </label>
     <div class="indicator-item pt-6">

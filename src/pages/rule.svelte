@@ -2,9 +2,9 @@
   import { onMount } from "svelte";
   // import Time from "svelte-time";
 
-  // import * as state from "@utils/state.js";
   import * as state from "@store/program.js";
   import { program, undoable, redoable } from "@store/program.js";
+  // import { nodes } from "@store/nodes";
 
   import Condition from "@components/Condition.svelte";
   import NodeList from "@components/NodeList.svelte";
@@ -19,17 +19,12 @@
 
   let localProgram;
 
+  // this feels unnecessary when we have the $ syntax.
   state.program.subscribe((p) => {
-    console.log("subscribed: ", p);
     localProgram = p;
   });
 
-  //todo: these are dummies. replace nodes with simulated nodes and a store. load rules from db.
-  let nodes = [
-    { id: "1", name: "Garden", temperature: 72, humidity: 40, light: 4000 },
-    { id: "2", name: "NW", temperature: 78, humidity: 41, light: 3800 },
-    { id: "3", name: "Coop", temperature: 83, humidity: 55, light: 500 },
-  ];
+  //todo: these are dummies. load rules from db.
   let rules = [
     {
       id: "1",
@@ -50,6 +45,8 @@
       lastOutput: "turned on port 1",
     },
   ];
+
+  let summarize = false;
 
   onMount(async () => {
     console.log($program);
@@ -103,6 +100,12 @@
     // jorf = jorf;
     await state.update();
   }
+
+  async function conditions(filter) {
+    let c = ["every", "state"];
+    c = [...c, "temperature"];
+    return c;
+  }
 </script>
 
 <div class="card card-bordered p-2 shadow-inner">
@@ -130,7 +133,7 @@
       >
     </div>
   </div>
-  <div class="card card-bordered p-2 mb-8">
+  <!-- <div class="card card-bordered p-2 mb-8">
     <div class="card-title">State</div>
     <ul class="card-body">
       {#if $program.state_vars}
@@ -139,53 +142,44 @@
         {/each}
       {/if}
     </ul>
-  </div>
+  </div> -->
+  <button
+    class="btn btn-xs w-24"
+    class:btn-outline={summarize}
+    on:click={() => (summarize = !summarize)}>summarize</button
+  >
 
   {#if $program.rules.length}
     {#each $program.rules as rule}
       <div class="mb-8 grid">
         <div class="flex flex-row w-full group">
           <input
-            class="input text-2xl bg-primary placeholder-primary-100-content text-primary-content rounded-b-none"
-            bind:value={rule.name}
+            class="input text-lg w-full placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
             placeholder="rule"
-            on:blur={saveProgram}
-          />
-
-          <input
-            class="input hover:input-bordered w-full"
-            bind:value={rule.description}
-            placeholder="description"
             on:blur={saveProgram}
           />
           <RemoveButton remove={() => removeRule(rule)} />
         </div>
-        <div
-          class="sm:columns-2 p-2 border-primary border-2 rounded-3xl rounded-tl-none rounded"
-        >
-          <h3 class="text-xl btn btn-accent no-animation w-24 rounded-b-none">
-            when
-          </h3>
-          <div
-            class="grid break-after-column card card-bordered border-2 rounded-tl-none border-accent p-2"
-          >
-            <Condition condition={rule.condition} />
-            <button
-              class="btn"
-              on:click={(event) => addCondition(rule.condition)}>+</button
-            >
+        <div class="sm:columns-2 card card-bordered border-2 border-accent p-2">
+          <h3 class="text-xl no-animation">when</h3>
+          <div class="grid break-after-column">
+            <Condition condition={rule.condition} {summarize} />
+            {#if !summarize}
+              <button
+                class="btn"
+                on:click={(event) => addCondition(rule.condition)}>+</button
+              >
+            {/if}
           </div>
 
-          <h3 class="text-xl btn btn-accent no-animation w-24 rounded-b-none">
-            do
-          </h3>
-          <div
-            class="grid card card-bordered border-2 rounded-tl-none border-accent p-2"
-          >
-            <Action action={rule.action} />
-            <button class="btn" on:click={(event) => addCommand(rule.action)}
-              >+</button
-            >
+          <h3 class="text-xl no-animation">do</h3>
+          <div class="grid">
+            <Action action={rule.action} {summarize} />
+            {#if !summarize}
+              <button class="btn" on:click={(event) => addCommand(rule.action)}
+                >+</button
+              >
+            {/if}
           </div>
         </div>
       </div>
@@ -196,7 +190,7 @@
   <button class="btn" on:click={(event) => addRule()}>+ rule</button>
 
   <h3 class="text-xl mt-10">Uses nodes</h3>
-  <NodeList {nodes} />
+  <NodeList />
 </div>
 
 <style>

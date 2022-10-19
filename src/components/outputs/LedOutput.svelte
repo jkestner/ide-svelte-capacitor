@@ -1,11 +1,12 @@
 <script>
-  import Popdown from "@components/transitions/Popdown.svelte";
+  import Output from "./Output.svelte";
 
   export function summary() {
-    return "";
+    return "blink LED";
+  }
+  function test() {
+    console.log("testing LED");
   }
 </script>
 
-<Popdown>
-  <div class="card bg-neutral">LED out</div>
-</Popdown>
+<Output {test} {summary}>LED out</Output>

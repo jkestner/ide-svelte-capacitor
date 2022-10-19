@@ -3,31 +3,38 @@
   import VariableInserter from "@components/VariableInserter.svelte";
 
   export let params = [];
+  let account = "";
+  let content = "";
 
   export function summary() {
-    return "temp, light";
+    return "tweet";
   }
   function test() {
-    console.log("testing log");
+    console.log("testing tweet from " + account);
   }
 </script>
 
 <Output {test} {summary}>
   <div class="form-control">
     <label class="input-group">
-      <span>Where</span>
-      <input type="text" placeholder="dashboard" class="input input-bordered" />
-      dashboard, or a csv file (where?) or google spreadsheet or
+      <span>Account</span>
+      <input
+        type="text"
+        placeholder="@supermechanical"
+        class="input input-bordered"
+        bind:value={account}
+      />
     </label>
   </div>
 
   <div class="form-control indicator">
     <label class="input-group">
-      <span>Body</span>
+      <span>Tweet</span>
       <textarea
         type="text"
-        placeholder="info@site.com"
+        placeholder="tweet"
         class="textarea textarea-bordered"
+        bind:value={content}
       />
     </label>
     <div class="indicator-item pt-6">

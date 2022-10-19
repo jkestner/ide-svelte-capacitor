@@ -2,7 +2,12 @@
   import PartPicker from "./PartPicker.svelte";
   import LedOutput from "./outputs/LedOutput.svelte";
   import EmailOutput from "./outputs/EmailOutput.svelte";
+  import GPOutput from "./outputs/GPOutput.svelte";
   import LogOutput from "./outputs/LogOutput.svelte";
+  import TwitterOutput from "./outputs/TwitterOutput.svelte";
+  import SMSOutput from "./outputs/SMSOutput.svelte";
+  import StateOutput from "./outputs/StateOutput.svelte";
+  import HTTPOutput from "./outputs/HTTPOutput.svelte";
 
   const commands = [
     {
@@ -20,13 +25,43 @@
       value: "log",
       component: LogOutput,
     },
+    {
+      name: "Set pin",
+      value: "gpout",
+      component: GPOutput,
+    },
+    {
+      name: "Tweet",
+      value: "twitter",
+      component: TwitterOutput,
+    },
+    {
+      name: "Call URL",
+      value: "httpout",
+      component: HTTPOutput,
+    },
+    {
+      name: "Text",
+      value: "sms",
+      component: SMSOutput,
+    },
+    {
+      name: "Set state",
+      value: "state",
+      component: StateOutput,
+    },
   ];
 
   export let command;
+  export let summarize;
 </script>
 
 {#if command && command.command}
-  <div class="bg-accent mb-2 rounded-xl w-full">
-    <PartPicker vocabulary={commands} bind:value={command.command} />
-  </div>
+  {#if summarize}
+    <!-- <div>    <svelte:component this={selected().component} />    </div> -->
+  {:else}
+    <div class="bg-accent mb-2 rounded-xl w-full">
+      <PartPicker vocabulary={commands} bind:value={command.command} />
+    </div>
+  {/if}
 {/if}
