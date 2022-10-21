@@ -30,17 +30,17 @@
   }
 </script>
 
-<div class="card cord-bordered m-1">
+<div class="card m-1">
   <h2 class="card-title">{node.name}</h2>
-  <div class="card-body columns-2">
-    <div class="stats bg-primary text-primary-content">
-      {#each io() as [attribute_name, attribute_value]}
+  <div class="card-body">
+    <div class="flex bg-primary text-primary-content rounded-xl">
+      {#each node.sensors as sensor}
         <div class="stat">
           <div class="stat-title">
-            {attribute_name}
+            {sensor.name}
           </div>
           <div class="stat-value">
-            {attribute_value}
+            {sensor.value}
           </div>
           <div class="stat-desc" />
         </div>

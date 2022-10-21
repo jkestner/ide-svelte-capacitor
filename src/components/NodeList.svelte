@@ -17,13 +17,13 @@
 
         <div class="stats bg-primary text-primary-content col-span-2">
           <div class="stat">
-            {node.temperature / 100}ºF
+            {node.sensors[0].value / 100}ºF
           </div>
           <div class="stat">
-            {node.humidity}%
+            {Math.floor(node.sensors[2].value / 100)}%
           </div>
           <div class="stat">
-            {node.light} lux
+            {node.sensors[1].value} lux
           </div>
         </div>
       </a>

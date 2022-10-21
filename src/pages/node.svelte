@@ -23,20 +23,10 @@
       lastOutput: "turned on port 1",
     },
   ];
-
-  function nodes_filtered() {
-    if ($params.id) {
-      let b = $nodes.find((n) => {
-        return n.id === $params.id;
-      });
-      console.log(b);
-      return [b];
-    } else return $nodes;
-  }
 </script>
 
 <div class="container">
-  {#each nodes_filtered() as node}
+  {#each $nodes as node}
     <NodeDetail {node} />
   {/each}
 </div>
