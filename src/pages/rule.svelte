@@ -121,16 +121,17 @@
       >
     </div>
   </div>
-  <!-- <div class="card card-bordered p-2 mb-8">
+  <div class="card card-bordered p-2 mb-8">
     <div class="card-title">State</div>
     <ul class="card-body">
       {#if $program.state_vars}
         {#each $program.state_vars as v}
-          <li>{v.var_name}</li>
+          <!-- <li>{v.var_name}</li> -->
+          <li>{v}</li>
         {/each}
       {/if}
     </ul>
-  </div> -->
+  </div>
   <button
     class="btn btn-xs w-24"
     class:btn-outline={summarize}
