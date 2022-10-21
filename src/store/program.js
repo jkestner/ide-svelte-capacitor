@@ -3,12 +3,11 @@ import * as IDEObjects from "../IDEObjects";
 
 var db; // PouchDB (or whatever) instance
 var dbDoc; // the doc in the db
-var program_structure = IDEObjects.program_structure;
 // var jorf = new IDEObjects.JProgram(IDEObjects.jorf);
 let revs = [];
 let revIndex = -1;
 
-export const program = writable(program_structure)
+export const program = writable(IDEObjects.program_structure)
 export const undoable = writable(false)
 export const redoable = writable(false)
 
@@ -17,7 +16,7 @@ export async function init(pouch) {
     //todo: use post instead?
     var response = await pouch.put({
       _id: "program",
-      program: program_structure,
+      program: IDEObjects.program_structure,
     });
     console.log("init db: ", response);
   } catch (err) {
@@ -48,10 +47,14 @@ export async function boot(pouch) {
   revIndex = revs.length - 1;
   undoable.set(revIndex > 0);
   redoable.set(revs.length-1 > revIndex);
+
+  program.subscribe((newProgram) => {
+    update();
+  });
 }
 
 export async function update() {
-  // this is dumb - we will not update the whole database every time something changes, once we add _id everywhere.
+  // TODO: this is dumb - we will not update the whole database every time something changes, once we add _id everywhere.
   // do we need to nest everything, as opposed to stores for rules, actions, etc?
   // or a middle ground would be to just make a doc at the right level of granularity. Each rule gets an _id?
   dbDoc.program.updated = new Date();
@@ -66,7 +69,6 @@ export async function update() {
 
   undoable.set(revIndex > 0);
   redoable.set(revs.length-1 > revIndex);
-  program.set(dbDoc.program);
 }
 
 // export function undoable() {

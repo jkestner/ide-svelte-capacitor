@@ -14,15 +14,14 @@
         <h2 class="w-40 card-title">
           {node.name}
         </h2>
-
-        <div class="stats bg-primary text-primary-content col-span-2">
-          <div class="stat">
+        <div class="flex w-1/3 bg-primary text-primary-content rounded-xl">
+          <div class="stat stat-value text-base">
             {node.sensors[0].value / 100}ºF
           </div>
-          <div class="stat">
+          <div class="stat stat-value text-base">
             {Math.floor(node.sensors[2].value / 100)}%
           </div>
-          <div class="stat">
+          <div class="stat stat-value text-base">
             {node.sensors[1].value} lux
           </div>
         </div>

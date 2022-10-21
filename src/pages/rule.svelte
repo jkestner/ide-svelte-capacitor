@@ -61,14 +61,12 @@
         expressions: [],
       },
     });
-    program.set(localProgram);
-    state.update();
+    $program = localProgram;
   }
 
   async function removeRule(rule) {
     localProgram.rules.splice(localProgram.rules.indexOf(rule), 1);
-    program.set(localProgram);
-    state.update();
+    $program = localProgram;
   }
 
   async function addCondition(condition) {
@@ -83,8 +81,7 @@
         value: "72",
       },
     });
-    await program.set(localProgram);
-    state.update();
+    $program = localProgram;
   }
 
   async function addCommand(action) {
@@ -92,19 +89,7 @@
       command: "led",
       params: [],
     });
-    program.set(localProgram);
-    state.update();
-  }
-
-  async function saveProgram() {
-    // jorf = jorf;
-    await state.update();
-  }
-
-  async function conditions(filter) {
-    let c = ["every", "state"];
-    c = [...c, "temperature"];
-    return c;
+    $program = localProgram;
   }
 </script>
 
@@ -112,9 +97,12 @@
   <div class="flex flex-row justify-between items-center">
     <input
       class="input text-3xl font-bold m-1"
-      bind:value={$program.name}
+      value={$program.name}
       placeholder="program"
-      on:blur={saveProgram}
+      on:change={(me) => {
+        $program.name = me.target.value;
+        $program = $program;
+      }}
     />
     <div class="flex items-center gap-2">
       <button
@@ -156,7 +144,11 @@
           <input
             class="input text-lg placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
             placeholder="rule"
-            on:blur={saveProgram}
+            value={rule.name || ""}
+            on:change={(me) => {
+              rule.name = me.target.value;
+              $program = $program;
+            }}
           />
           <RemoveButton remove={() => removeRule(rule)} />
         </div>
