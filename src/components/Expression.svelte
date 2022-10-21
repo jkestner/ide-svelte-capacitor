@@ -8,9 +8,9 @@
     { name: "is greater than", value: ">" },
     { name: "is less than", value: "<" },
     { name: "doesn't equal", value: "!=" },
-    { name: "changes by", value: "∆" },
-    { name: "rises by", value: "∆" },
-    { name: "falls by", value: "∆" },
+    { name: "changes by", value: "↕︎" },
+    { name: "rises by", value: "ꜛ" },
+    { name: "falls by", value: "ꜜ" },
   ];
   const bool_operations = [
     { name: "and", value: "and" },
@@ -22,11 +22,7 @@
 </script>
 
 {#if expression}
-  <div
-    class="flex items-stretch bg-accent p-1 mb-2 rounded-xl {isRoot
-      ? 'w-full'
-      : 'grid-cols-1 ml-3'}"
-  >
+  <div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
     {#if expression.left.expr}
       <svelte:self expression={expression.left.expr} /><br />
       <PartPicker

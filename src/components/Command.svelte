@@ -60,7 +60,7 @@
   {#if summarize}
     <!-- <div>    <svelte:component this={selected().component} />    </div> -->
   {:else}
-    <div class="bg-accent mb-2 rounded-xl w-full">
+    <div class=" mb-2">
       <PartPicker vocabulary={commands} bind:value={command.command} />
     </div>
   {/if}

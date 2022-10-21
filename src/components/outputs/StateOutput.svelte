@@ -10,12 +10,9 @@
   export function summary() {
     return "email@address";
   }
-  function test() {
-    console.log("testing email to " + to);
-  }
 </script>
 
-<Output {test} {summary}>
+<Output {summary}>
   <Expression
     expression={{
       column: 3,

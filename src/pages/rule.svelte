@@ -152,9 +152,9 @@
   {#if $program.rules.length}
     {#each $program.rules as rule}
       <div class="mb-8 grid">
-        <div class="flex flex-row w-full group">
+        <div class="flex flex-row group">
           <input
-            class="input text-lg w-full placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
+            class="input text-lg placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
             placeholder="rule"
             on:blur={saveProgram}
           />
@@ -166,7 +166,7 @@
             <Condition condition={rule.condition} {summarize} />
             {#if !summarize}
               <button
-                class="btn"
+                class="btn w-24"
                 on:click={(event) => addCondition(rule.condition)}>+</button
               >
             {/if}
@@ -176,8 +176,9 @@
           <div class="grid">
             <Action action={rule.action} {summarize} />
             {#if !summarize}
-              <button class="btn" on:click={(event) => addCommand(rule.action)}
-                >+</button
+              <button
+                class="btn w-24"
+                on:click={(event) => addCommand(rule.action)}>+</button
               >
             {/if}
           </div>

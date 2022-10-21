@@ -16,10 +16,7 @@
   }
 </script>
 
-<div
-  class="card bg-accent p-1 {$$props.class}"
-  class:w-full={selected().component}
->
+<div class="card p-1 {$$props.class}" class:w-full={selected().component}>
   {#if swiper}
     swiper
     <!-- <swiper
@@ -50,7 +47,7 @@
   {:else}
     <div class="chooser flex items-baseline">
       <select
-        class="select  bg-accent text-accent-content"
+        class="select    bg-slate-100 "
         bind:value
         placeholder="command"
         color="accent"
