@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  // import Time from "svelte-time";
+  import Time from "svelte-time";
 
   import * as state from "@store/program.js";
   import { program, undoable, redoable } from "@store/program.js";
@@ -112,8 +112,9 @@
       >
         <FaUndoAlt />
       </button>
-      <!-- <Time relative timestamp={program.updated} /> -->
-      <em class="text-sm">{$program.updated}</em>
+      <Time relative timestamp={program.updated} />
+      <!-- TODO: show actual time on hover-->
+      <!-- <em class="text-sm">{$program.updated}</em> -->
       <button
         class="btn btn-sm btn-circle p-1"
         disabled={!$redoable}
