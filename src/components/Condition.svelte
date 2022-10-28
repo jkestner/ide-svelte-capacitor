@@ -1,9 +1,10 @@
 <script>
   import * as state from "@store/program.js";
   import Expression from "./Expression.svelte";
-  import RemoveButton from "./RemoveButton.svelte";
+  import RemoveButton from "./ide/RemoveButton.svelte";
   import { slide } from "svelte/transition";
   import { leftover } from "@roxi/routify";
+  import NotesTextarea from "./ide/NotesTextarea.svelte";
 
   export let condition;
   export let summarize;

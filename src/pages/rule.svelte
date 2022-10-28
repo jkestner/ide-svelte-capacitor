@@ -8,7 +8,7 @@
 
   import Condition from "@components/Condition.svelte";
   import NodeList from "@components/NodeList.svelte";
-  import RemoveButton from "@components/RemoveButton.svelte";
+  import RemoveButton from "@components/ide/RemoveButton.svelte";
   import { params } from "@roxi/routify";
   import Popdown from "@components/transitions/Popdown.svelte";
 

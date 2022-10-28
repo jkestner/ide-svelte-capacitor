@@ -1,8 +1,9 @@
 <script>
   import * as state from "@store/program.js";
   import Command from "./Command.svelte";
-  import RemoveButton from "./RemoveButton.svelte";
+  import RemoveButton from "./ide/RemoveButton.svelte";
   import { slide } from "svelte/transition";
+  import NotesTextarea from "./ide/NotesTextarea.svelte";
 
   export let action;
   export let summarize;
@@ -28,6 +29,7 @@
           <Command {command} {summarize} />
           <RemoveButton remove={() => removeCommand(command)} />
         </div>
+        <NotesTextarea bind:notes={command.notes} />
       </div>
     {/if}
   {/each}
