@@ -61,7 +61,11 @@
     <!-- <div>    <svelte:component this={selected().component} />    </div> -->
   {:else}
     <div class=" mb-2">
-      <PartPicker vocabulary={commands} bind:value={command.command} />
+      <PartPicker
+        vocabulary={commands}
+        bind:value={command.command}
+        bind:params={command.params}
+      />
     </div>
   {/if}
 {/if}

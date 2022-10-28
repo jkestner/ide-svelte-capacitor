@@ -1,7 +1,5 @@
 <script>
   import { nodes } from "@store/nodes";
-
-  // export let nodes;
 </script>
 
 <ul class="menu mt-6">
@@ -12,7 +10,7 @@
           <img src="wedge.svg" />
         </div>
         <h2 class="w-40 card-title">
-          {node.name}
+          {node.label}
         </h2>
         <div class="flex w-1/3 bg-primary text-primary-content rounded-xl">
           <div class="stat stat-value text-base">

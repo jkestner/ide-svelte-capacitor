@@ -2,28 +2,50 @@
   import AutoComplete from "simple-svelte-autocomplete";
   import { nodes } from "@store/nodes";
   import { program } from "@store/program";
+  import { JStateVar } from "../IDEObjects";
 
   export let value;
 
-  let items = ["every", "time"];
+  let items = [
+    { label: "every", component: "IntervalInput" },
+    { label: "time", component: "TimeInput" },
+    { label: "random", component: "RandomInput" },
+  ];
   let nodeItems = [];
+  let createText = "Add this state variable";
 
   //TODO: is this reactive? needs to be
   $nodes.forEach((n) => {
-    n.sensors.forEach((s) => nodeItems.push("🛻" + n.name + "." + s.name));
+    n.sensors.forEach((s) =>
+      nodeItems.push({
+        label: n.label + "." + s.label,
+        description: s.value,
+        value: s.label,
+        component: s.label,
+      })
+    );
   });
-  items.push(...nodeItems);
-  items.push(...$program.state_vars);
+  $: items.push(...nodeItems);
+  $: items.push(...$program.state_vars);
 
-  function addStateVar(state_var) {
-    // this check won't work when we're storing a proper object instead of just a name string
-    if (!$program.state_vars.includes(state_var)) {
-      $program.state_vars.push(state_var);
+  function addStateVar(label) {
+    //TODO: going to need to reference count so we know when to delete a variable.
+    let label_exists =
+      label && $program.state_vars.some((v) => v.label == label);
+    if (!label_exists) {
+      let sv = new JStateVar(label);
+      $program.state_vars.push(sv);
       $program = $program;
-      items.push(state_var);
+      items.push(sv);
     }
-    return state_var;
+    return label;
   }
+
+  //TODO: detect new variable vs an expression - starts with a number or parenthesis?
+  // function textClean(userEnteredText) {
+  //   console.log(userEnteredText);
+  //   return userEnteredText + "!";
+  // }
 </script>
 
 <!-- 
@@ -32,17 +54,24 @@
   class="input outline-none outline-0 flex-auto w-36"
   bind:value
 /> -->
-<!-- TODO: call addStateVar on blur, passing the new item -->
+<!-- TODO: call addStateVar on blur, passing the new item. Until then, -->
+<!-- TODO: restore current value to text box on blur -->
 <AutoComplete
   create="true"
+  cleanUserText="true"
   {items}
   bind:selectedItem={value}
+  labelFieldName="label"
+  valueFieldName="value"
   onCreate={addStateVar}
-  createText="Add this state variable"
+  {createText}
   hideArrow
-  class="bg-slate-100"
+  class="p-2 bg-slate-100"
 >
   <span slot="item" let:item let:label>
     {@html label}
+    {#if item.description}
+      <span class="align-right">{item.description}</span>
+    {/if}
   </span>
 </AutoComplete>

@@ -1,8 +1,9 @@
 <script>
-  import { blank_object } from "svelte/internal";
+  import { blank_object, loop_guard } from "svelte/internal";
 
   export let vocabulary;
   export let value = undefined;
+  export let params = undefined;
   export let swiper = false;
   export let palette = false;
 
@@ -16,7 +17,7 @@
   }
 </script>
 
-<div class="card p-1 {$$props.class}" class:w-full={selected().component}>
+<div class="card p-1 flex {$$props.class}" class:w-full={selected().component}>
   {#if swiper}
     swiper
     <!-- <swiper
@@ -39,7 +40,7 @@
           class="btn"
           type="radio"
           bind:group={value}
-          data-title={a.name}
+          data-title={a.label}
           value={a.value}
         />
       {/each}
@@ -47,14 +48,14 @@
   {:else}
     <div class="chooser flex items-baseline">
       <select
-        class="select    bg-slate-100 "
+        class="select bg-slate-100 "
         bind:value
         placeholder="command"
         color="accent"
       >
         {#each vocabulary as a}
           <option value={a.value} selected={selected().value == a.value}
-            >{a.name}</option
+            >{a.label}</option
           >
         {/each}
       </select>
@@ -66,6 +67,6 @@
   {/if}
 
   {#if selected().component}
-    <svelte:component this={selected().component} />
+    <svelte:component this={selected().component} {value} {params} />
   {/if}
 </div>

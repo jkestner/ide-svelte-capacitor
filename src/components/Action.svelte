@@ -21,11 +21,13 @@
       <div>{command.command}</div>
     {:else}
       <div
-        class="flex items-stretch group"
+        class="flex items-stretch group columns-2  hover:bg-slate-100"
         transition:slide={{ duration: 100 }}
       >
-        <Command {command} {summarize} />
-        <RemoveButton remove={() => removeCommand(command)} />
+        <div class="w-1/2 relative">
+          <Command {command} {summarize} />
+          <RemoveButton remove={() => removeCommand(command)} />
+        </div>
       </div>
     {/if}
   {/each}

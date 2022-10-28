@@ -86,8 +86,8 @@
 
   async function addCommand(action) {
     action.commands.push({
-      command: "led",
-      params: [],
+      command: "sms",
+      params: { to: "602", content: "texto" },
     });
     $program = localProgram;
   }

@@ -89,7 +89,7 @@ export const jorf = {
         "StateVar": {
           "column": 5,
           "lineno": 2,
-          "var_name": "meow"
+          "label": "meow"
         }
       }
     ]
@@ -105,12 +105,12 @@ export const program = {
         "action": {
           "commands": [
             {
-                "command": "led",
-                "params": []
+                "command": "sms",
+                "params": {to:"512", content:"content"}
             },
             {
                 "command": "email",
-                "params": []
+                "params": {to:"bob@dole", content:"content"}
             }
           ],
         },
@@ -133,7 +133,7 @@ export const program = {
     ],
     "state_vars": [
       {
-          "var_name": "meow"
+          "label": "meow"
       }
     ]
 };
@@ -338,12 +338,12 @@ export class JOperator extends JPart {
 
 
 export class JStateVar extends JPart {
-  var_name: string | undefined;
+  label: string | undefined;
   value: any | undefined;
 
-  constructor(var_name: string) {
+  constructor(label: string) {
     super();
-    this.var_name = var_name;
+    this.label = label;
     this.value = undefined;
   }
 }

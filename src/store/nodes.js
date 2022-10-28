@@ -3,11 +3,12 @@ import { writable, readable, derived } from "svelte/store";
   //todo: these are dummies. replace nodes with simulated nodes.
 
   class Node {
-    constructor(name) {
-        this.name = name;
+    constructor(label) {
+        this.label = label;
         this.sensorPollingRate = 1; // in seconds
         this.sensors = [];
         this.log = [];
+        this.lastUpdated = new Date();
 
         this.addSensor("temperature");       
         this.addSensor("light");       
@@ -19,12 +20,13 @@ import { writable, readable, derived } from "svelte/store";
       this.sensors.forEach(s => {
         s.value += Math.floor((Math.random() -.5) * 10);
       })
+      this.lastUpdated = new Date();
       // setTimeout(this.simulate.bind(this), this.sensorPollingRate*1000);
     }
 
-    addSensor(name) {
+    addSensor(label) {
       this.sensors.push({
-        name: name,
+        label: label,
         value: Math.floor(Math.random()*400+100)*10,
         inputClass: "GPInput" //use this to dynamically load appropriate UI such as constraints for the possible values (i.e. slider with range)
       })
