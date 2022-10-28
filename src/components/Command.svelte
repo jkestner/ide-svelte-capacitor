@@ -1,4 +1,6 @@
 <script>
+  import RuleLine from "./ide/RuleLine.svelte";
+
   import PartPicker from "./PartPicker.svelte";
   import LedOutput from "./outputs/LedOutput.svelte";
   import EmailOutput from "./outputs/EmailOutput.svelte";
@@ -53,19 +55,15 @@
   ];
 
   export let command;
-  export let summarize;
+  export let action;
 </script>
 
-{#if command && command.command}
-  {#if summarize}
-    <!-- <div>    <svelte:component this={selected().component} />    </div> -->
-  {:else}
-    <div class=" mb-2">
-      <PartPicker
-        vocabulary={commands}
-        bind:value={command.command}
-        bind:params={command.params}
-      />
-    </div>
-  {/if}
-{/if}
+<RuleLine item={command} collection={action.commands}>
+  <div class=" mb-2">
+    <PartPicker
+      vocabulary={commands}
+      bind:value={command.command}
+      bind:params={command.params}
+    />
+  </div>
+</RuleLine>

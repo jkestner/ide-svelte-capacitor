@@ -40,24 +40,18 @@
         <!-- workaround so that elements that have a svelte component (with bindings?) don't disappear when drag/dropping-->
         {#if expression.isDndShadowItem}
           <div>
-            {expression.left.value}
+            {expression.left.value.label}
             {expression.op.op}
             {expression.right.value}
           </div>
         {:else if summarize}
           <div>
-            {expression.left.value}
+            {expression.left.value.label}
             {expression.op.op}
             {expression.right.value}
           </div>
         {:else}
-          <div class="flex items-stretch group columns-2  hover:bg-slate-100">
-            <div class="w-1/2 relative">
-              <Expression {expression} {condition} isRoot />
-              <RemoveButton remove={() => removeExpression(expression)} />
-            </div>
-            <NotesTextarea bind:notes={expression.notes} />
-          </div>
+          <Expression {expression} {condition} isRoot />
         {/if}
       </div>
     {/each}
