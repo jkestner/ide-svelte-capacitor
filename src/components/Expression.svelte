@@ -99,7 +99,8 @@ TODO: if this Literal equals a known input type, replace the rest with the input
       />
 
       {#if expression.right.expr}
-        <svelte:self expression={expression.right.expr} />
+        a
+        <!-- <svelte:self expression={expression.right.expr} /> -->
       {:else}
         <Literal bind:value={expression.right.value} />
       {/if}

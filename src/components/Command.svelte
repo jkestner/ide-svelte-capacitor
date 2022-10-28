@@ -11,42 +11,42 @@
 
   const commands = [
     {
-      name: "LED",
+      label: "LED",
       value: "led",
       component: LedOutput,
     },
     {
-      name: "Email",
+      label: "Email",
       value: "email",
       component: EmailOutput,
     },
     {
-      name: "Log",
+      label: "Log",
       value: "log",
       component: LogOutput,
     },
     {
-      name: "Set pin",
+      label: "Set pin",
       value: "gpout",
       component: GPOutput,
     },
     {
-      name: "Tweet",
+      label: "Tweet",
       value: "twitter",
       component: TwitterOutput,
     },
     {
-      name: "Call URL",
+      label: "Call URL",
       value: "httpout",
       component: HTTPOutput,
     },
     {
-      name: "Text",
+      label: "Text",
       value: "sms",
       component: SMSOutput,
     },
     {
-      name: "Set state",
+      label: "Set state",
       value: "state",
       component: StateOutput,
     },

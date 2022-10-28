@@ -55,6 +55,7 @@
 
   async function addRule() {
     localProgram.rules.push({
+      id: Math.floor(Math.random() * 999),
       action: {
         commands: [],
       },
@@ -72,6 +73,7 @@
 
   async function addCondition(condition) {
     condition.expressions.push({
+      id: Math.floor(Math.random() * 999),
       left: {
         value: "temp",
       },
@@ -87,6 +89,7 @@
 
   async function addCommand(action) {
     action.commands.push({
+      id: Math.floor(Math.random() * 999),
       command: "sms",
       params: { to: "602", content: "texto" },
     });
@@ -133,7 +136,7 @@
   {#if $program.rules.length}
     {#each $program.rules as rule}
       <div class="mb-8 grid">
-        <div class="flex flex-row group">
+        <div class="flex flex-row group relative">
           <input
             class="input text-lg placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
             placeholder="rule"
@@ -145,7 +148,9 @@
           />
           <RemoveButton remove={() => removeRule(rule)} />
         </div>
-        <div class="sm:columns-2 card card-bordered border-2 border-accent p-2">
+        <div
+          class="sm:columns-2 card card-bordered border-2 border-accent p-2 overflow-visible"
+        >
           <h3 class="text-xl no-animation">when</h3>
           <div class="grid break-after-column">
             <Condition condition={rule.condition} {summarize} />
