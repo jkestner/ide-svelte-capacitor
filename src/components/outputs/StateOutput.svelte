@@ -3,12 +3,10 @@
   import Expression from "@components/Expression.svelte";
   import VariableInserter from "@components/VariableInserter.svelte";
 
-  export let params = [];
-  let to = "";
-  let body = "";
+  export let params = {};
 
   export function summary() {
-    return "email@address";
+    return "state";
   }
 </script>
 

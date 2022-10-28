@@ -2,17 +2,17 @@
   import Input from "./Input.svelte";
   import Literal from "@components/Literal.svelte";
 
-  export let pin = 1;
-  export let value = "high";
+  export let value = 72;
 
   export function summary() {
-    return "pin " + pin;
+    return "temperature " + value;
   }
   function sample() {
-    console.log("sampling pin ", pin);
+    console.log("sampling temperature");
   }
 </script>
 
 <Input {summary} {sample}>
-  <Literal bind:value={pin} />
+  temperature range slider, f/c, etc
+  <Literal bind:value />
 </Input>

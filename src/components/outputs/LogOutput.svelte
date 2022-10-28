@@ -1,8 +1,7 @@
 <script>
   import Output from "./Output.svelte";
-  import VariableInserter from "@components/VariableInserter.svelte";
 
-  export let params = [];
+  export let params = {};
 
   export function summary() {
     return "temp, light";
@@ -13,25 +12,18 @@
 </script>
 
 <Output {test} {summary}>
-  <div class="form-control">
-    <label class="input-group">
-      <span>Where</span>
-      <input type="text" placeholder="dashboard" class="input input-bordered" />
-      dashboard, or a csv file (where?) or google spreadsheet or
-    </label>
-  </div>
-
-  <div class="form-control indicator">
-    <label class="input-group">
-      <span>Body</span>
-      <textarea
-        type="text"
-        placeholder="info@site.com"
-        class="textarea textarea-bordered"
-      />
-    </label>
-    <div class="indicator-item pt-6">
-      <VariableInserter />
-    </div>
-  </div>
+  <label class="input-group" style="width: auto; float: left">
+    <span>Where</span>
+    <input type="text" placeholder="dashboard" class="input input-bordered" />
+    <!-- dashboard, or a csv file (where?) or google spreadsheet or -->
+  </label>
+  <label class="input-group" style="width: auto; float: left">
+    <span>Body</span>
+    <textarea
+      type="text"
+      placeholder="info@site.com"
+      rows="1"
+      class="textarea textarea-bordered"
+    />
+  </label>
 </Output>

@@ -3,7 +3,7 @@
   import Popdown from "@components/transitions/Popdown.svelte";
 
   export let summary;
-  export let read = undefined;
+  export let sample = undefined; //sample function
 </script>
 
 <Popdown>
@@ -12,8 +12,8 @@
   </div>
 
   <div class="card-actions">
-    {#if read}
-      <button class="btn btn-outline btn-xs" on:click={read}>read</button>
+    {#if sample}
+      <button class="btn btn-outline btn-xs" on:click={sample}>sample</button>
     {/if}
   </div>
 </Popdown>
