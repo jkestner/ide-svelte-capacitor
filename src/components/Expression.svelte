@@ -1,5 +1,6 @@
 <script>
   import RuleLine from "./ide/RuleLine.svelte";
+  import * as state from "@store/program.js";
 
   import GPInput from "./inputs/GPInput.svelte";
   import TemperatureInput from "./inputs/TemperatureInput.svelte";
@@ -72,9 +73,19 @@
     if (c) return c.component;
     else return null;
   }
+  function removeExpression(value) {
+    //todo: make sure this is a unique item with a key
+    let b = condition.expressions.filter((obj) => obj != value);
+    condition.expressions = b;
+    state.update();
+  }
 </script>
 
-<RuleLine item={expression} collection={condition.expressions}>
+<RuleLine
+  item={expression}
+  collection={condition.expressions}
+  remove={removeExpression(expression)}
+>
   <div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
     {#if expression.left.expr}
       <svelte:self expression={expression.left.expr} /><br />

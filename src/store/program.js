@@ -102,15 +102,15 @@ export async function redo() {
   }
 }
 
-export async function saveState(key, value, newKey) {
-  if (value)
-    dbDoc.state_vars[key] = value;
-  if (newKey && newKey !== key) {
-    Object.defineProperty(
-      dbDoc.state_vars,
-      newKey,
-      Object.getOwnPropertyDescriptor(dbDoc.state_vars, key));
-    delete dbDoc[key];
-  }
-  await update();
-}
+// export async function saveState(key, value, newKey) {
+//   if (value)
+//     dbDoc.state_vars[key] = value;
+//   if (newKey && newKey !== key) {
+//     Object.defineProperty(
+//       dbDoc.state_vars,
+//       newKey,
+//       Object.getOwnPropertyDescriptor(dbDoc.state_vars, key));
+//     delete dbDoc[key];
+//   }
+//   await update();
+// }
