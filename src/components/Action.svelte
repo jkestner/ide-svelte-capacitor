@@ -1,9 +1,6 @@
 <script>
   import * as state from "@store/program.js";
   import Command from "./Command.svelte";
-  import RemoveButton from "./ide/RemoveButton.svelte";
-  import { slide } from "svelte/transition";
-  import NotesTextarea from "./ide/NotesTextarea.svelte";
   import { dndzone } from "svelte-dnd-action";
   import { flip } from "svelte/animate";
 
@@ -28,17 +25,15 @@
   on:consider={handleSort}
   on:finalize={handleSort}
 >
-  {#if action}
-    {#each action.commands as command (command.id)}
-      <div animate:flip={{ duration: flipDurationMs }}>
-        {#if command.isDndShadowItem}
-          <div>{command.command}</div>
-        {:else if summarize}
-          <div>{command.command}</div>
-        {:else}
-          <Command {command} {action} />
-        {/if}
-      </div>
-    {/each}
-  {/if}
+  {#each action.commands as command (command.id)}
+    <div animate:flip={{ duration: flipDurationMs }}>
+      {#if command.isDndShadowItem}
+        <div>{command.command}</div>
+      {:else if summarize}
+        <div>{command.command}</div>
+      {:else}
+        <Command {command} {action} />
+      {/if}
+    </div>
+  {/each}
 </section>

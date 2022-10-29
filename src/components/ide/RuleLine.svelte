@@ -8,7 +8,7 @@
   export let item;
   export let collection;
   //   export let parent;
-  //   export let remove;
+  export let remove;
 
   function handleSort(e) {
     collection = e.detail.items;
@@ -24,13 +24,14 @@
   }
 </script>
 
-<div class="flex items-stretch group columns-3 hover:bg-slate-100 relative">
+<div class="flex items-stretch group columns-3 hover:bg-primary relative">
   <div class="w-2/3 md:w-1/2">
     <slot />
   </div>
   <NotesTextarea bind:notes={item.notes} />
   <div class="widgets">
-    <RemoveButton remove={() => removeAThing(item)} />
+    <RemoveButton remove={() => remove} />
+    <!-- <RemoveButton remove={() => removeAThing(item)} /> -->
     <div>=</div>
   </div>
 </div>

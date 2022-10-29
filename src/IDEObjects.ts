@@ -148,7 +148,7 @@ export const program_structure = {
         "commands": [],
       },
       "condition": {
-        "expressions": [ ]
+        "expressions": [],
       }
     }
   ],

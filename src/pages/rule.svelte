@@ -71,7 +71,7 @@
     $program = localProgram;
   }
 
-  async function addCondition(condition) {
+  async function addExpression(condition) {
     condition.expressions.push({
       id: Math.floor(Math.random() * 999),
       left: {
@@ -157,10 +157,12 @@
             {#if !summarize}
               <button
                 class="btn w-24"
-                on:click={(event) => addCondition(rule.condition)}>+</button
+                on:click={(event) => addExpression(rule.condition)}>+</button
               >
             {/if}
           </div>
+
+          <div class="divider" />
 
           <h3 class="text-xl no-animation">do</h3>
           <div class="grid">
