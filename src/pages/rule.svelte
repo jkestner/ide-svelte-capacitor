@@ -10,7 +10,6 @@
   import NodeList from "@components/NodeList.svelte";
   import RemoveButton from "@components/ide/RemoveButton.svelte";
   import { params } from "@roxi/routify";
-  import Popdown from "@components/transitions/Popdown.svelte";
 
   import FaUndoAlt from "svelte-icons/fa/FaUndoAlt.svelte";
   import FaRedoAlt from "svelte-icons/fa/FaRedoAlt.svelte";

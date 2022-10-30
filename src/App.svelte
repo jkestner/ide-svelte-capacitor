@@ -3,7 +3,6 @@
   import { onMount } from "svelte";
   import { routes } from "../.routify/routes";
   import * as state from "@store/program.js";
-  import { fade } from "svelte/transition";
 
   onMount(async () => {
     // try {

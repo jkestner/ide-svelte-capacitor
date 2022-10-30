@@ -1,10 +1,8 @@
 <script>
+  import RuleLine from "./ide/RuleLine.svelte";
+
   import * as state from "@store/program.js";
   import Expression from "./Expression.svelte";
-  import RemoveButton from "./ide/RemoveButton.svelte";
-  import { slide } from "svelte/transition";
-  import { leftover } from "@roxi/routify";
-  import NotesTextarea from "./ide/NotesTextarea.svelte";
   import { dndzone } from "svelte-dnd-action";
   import { flip } from "svelte/animate";
 
@@ -29,35 +27,34 @@
     {item.id} -
   {/each} -->
 
-  <!-- abstract this so Condition, Action, etc are inside a draggable row with close/drag widgets, responsive -->
   <section
     use:dndzone={{ items: condition.expressions, flipDurationMs: 300 }}
     on:consider={handleSort}
     on:finalize={handleSort}
   >
     {#each condition.expressions as expression (expression.id)}
-      <div animate:flip={{ duration: flipDurationMs }}>
+      <div class="relative" animate:flip={{ duration: flipDurationMs }}>
         <!-- workaround so that elements that have a svelte component (with bindings?) don't disappear when drag/dropping-->
         {#if expression.isDndShadowItem}
           <div>
-            {expression.left.value}
+            {expression.left.value.label || expression.left.value}
             {expression.op.op}
-            {expression.right.value}
+            {expression.right.value.label || expression.right.value}
           </div>
         {:else if summarize}
           <div>
-            {expression.left.value}
+            {expression.left.value.label || expression.left.value}
             {expression.op.op}
-            {expression.right.value}
+            {expression.right.value.label || expression.right.value}
           </div>
         {:else}
-          <div class="flex items-stretch group columns-2  hover:bg-slate-100">
-            <div class="w-1/2 relative">
-              <Expression {expression} {condition} isRoot />
-              <RemoveButton remove={() => removeExpression(expression)} />
-            </div>
-            <NotesTextarea bind:notes={expression.notes} />
-          </div>
+          <RuleLine
+            item={expression}
+            collection={condition.expressions}
+            remove={() => removeExpression(expression)}
+          >
+            <Expression {expression} {condition} isRoot />
+          </RuleLine>
         {/if}
       </div>
     {/each}

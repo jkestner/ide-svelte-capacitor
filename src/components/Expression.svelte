@@ -9,6 +9,7 @@
   import IntervalInput from "./inputs/IntervalInput.svelte";
   import TimeInput from "./inputs/TimeInput.svelte";
   import RandomInput from "./inputs/RandomInput.svelte";
+  import RuleLine from "./ide/RuleLine.svelte";
 
   const inputs = [
     {

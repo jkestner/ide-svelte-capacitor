@@ -53,19 +53,13 @@
   ];
 
   export let command;
-  export let summarize;
+  export let action;
 </script>
 
-{#if command && command.command}
-  {#if summarize}
-    <!-- <div>    <svelte:component this={selected().component} />    </div> -->
-  {:else}
-    <div class=" mb-2">
-      <PartPicker
-        vocabulary={commands}
-        bind:value={command.command}
-        bind:params={command.params}
-      />
-    </div>
-  {/if}
-{/if}
+<div class="mb-2">
+  <PartPicker
+    vocabulary={commands}
+    bind:value={command.command}
+    bind:params={command.params}
+  />
+</div>

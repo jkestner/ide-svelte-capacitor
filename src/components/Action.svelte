@@ -1,9 +1,8 @@
 <script>
+  import RuleLine from "./ide/RuleLine.svelte";
+
   import * as state from "@store/program.js";
   import Command from "./Command.svelte";
-  import RemoveButton from "./ide/RemoveButton.svelte";
-  import { slide } from "svelte/transition";
-  import NotesTextarea from "./ide/NotesTextarea.svelte";
   import { dndzone } from "svelte-dnd-action";
   import { flip } from "svelte/animate";
 
@@ -13,6 +12,7 @@
   function handleSort(e) {
     action.commands = e.detail.items;
   }
+  const flipDurationMs = 300;
 
   async function removeCommand(command) {
     //todo: make sure this is a unique item with a key
@@ -20,7 +20,6 @@
     action.commands = b;
     await state.update();
   }
-  const flipDurationMs = 300;
 </script>
 
 <section
@@ -30,22 +29,19 @@
 >
   {#if action}
     {#each action.commands as command (command.id)}
-      <div animate:flip={{ duration: flipDurationMs }}>
+      <div class="relative" animate:flip={{ duration: flipDurationMs }}>
         {#if command.isDndShadowItem}
           <div>{command.command}</div>
         {:else if summarize}
           <div>{command.command}</div>
         {:else}
-          <div
-            class="flex items-stretch group columns-2  hover:bg-slate-100"
-            transition:slide={{ duration: 100 }}
+          <RuleLine
+            item={command}
+            collection={action.commands}
+            remove={() => removeCommand(command)}
           >
-            <div class="w-1/2 relative">
-              <Command {command} {summarize} />
-              <RemoveButton remove={() => removeCommand(command)} />
-            </div>
-            <NotesTextarea bind:notes={command.notes} />
-          </div>
+            <Command {command} {action} />
+          </RuleLine>
         {/if}
       </div>
     {/each}
