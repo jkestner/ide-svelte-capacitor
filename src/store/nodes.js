@@ -37,7 +37,12 @@ export const nodes = writable([ new Node("Garden SW"), new Node("Garden NW"), ne
 
 setInterval(() => {
   nodes.update(current => {
-    current.forEach(node => node.simulate());
+    current.forEach((node) => {
+      //TODO: simulate dropout.
+      // if (Math.random() < .5) return;
+
+      node.simulate();
+    });
     return current;
   });
 }, 1000);

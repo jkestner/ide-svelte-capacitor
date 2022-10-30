@@ -8,6 +8,7 @@
   export let item;
   export let collection;
   export let remove;
+  export let summarize;
 
   function handleSort(e) {
     collection = e.detail.items;
@@ -28,8 +29,15 @@
     <slot />
   </div>
   <NotesTextarea bind:notes={item.notes} />
-  <div class="widgets">
+  <div class="widgets w-2">
+    <button
+      class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1 z-20 -ml-6 mt-0 right-1 top-1"
+      on:click={() => (summarize = !summarize)}>—</button
+    >
+    <button
+      class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1 z-20 -ml-6 mt-0 right-1 top-1"
+      >=</button
+    >
     <RemoveButton {remove} />
-    <div>=</div>
   </div>
 </div>

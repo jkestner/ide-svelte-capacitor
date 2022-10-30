@@ -47,6 +47,7 @@
           item={expression}
           collection={condition.expressions}
           remove={() => removeExpression(expression)}
+          {summarize}
         >
           <Expression {expression} {condition} isRoot />
         </RuleLine>
