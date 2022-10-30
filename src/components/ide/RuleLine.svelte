@@ -23,7 +23,7 @@
   }
 </script>
 
-<div class="flex items-stretch group columns-3 hover:bg-slate-100 relative">
+<div class="flex items-stretch group columns-3 hover:bg-primary relative">
   <div class="w-2/3">
     <slot />
   </div>

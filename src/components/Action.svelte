@@ -27,23 +27,21 @@
   on:consider={handleSort}
   on:finalize={handleSort}
 >
-  {#if action}
-    {#each action.commands as command (command.id)}
-      <div class="relative" animate:flip={{ duration: flipDurationMs }}>
-        {#if command.isDndShadowItem}
-          <div>{command.command}</div>
-        {:else if summarize}
-          <div>{command.command}</div>
-        {:else}
-          <RuleLine
-            item={command}
-            collection={action.commands}
-            remove={() => removeCommand(command)}
-          >
-            <Command {command} {action} />
-          </RuleLine>
-        {/if}
-      </div>
-    {/each}
-  {/if}
+  {#each action.commands as command (command.id)}
+    <div class="relative" animate:flip={{ duration: flipDurationMs }}>
+      {#if command.isDndShadowItem}
+        <div>{command.command}</div>
+      {:else if summarize}
+        <div>{command.command}</div>
+      {:else}
+        <RuleLine
+          item={command}
+          collection={action.commands}
+          remove={() => removeCommand(command)}
+        >
+          <Command {command} {action} />
+        </RuleLine>
+      {/if}
+    </div>
+  {/each}
 </section>

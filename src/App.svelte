@@ -8,7 +8,9 @@
     // try {
     //   let db = new PouchDB("Programs");
     //   if (db) console.log("destroy db: ", await db.destroy());
-    // } catch {}
+    // } catch {
+    //   console.log("didn't destroy db");
+    // }
 
     console.log("boot db");
     await state.boot(new PouchDB("Programs"));

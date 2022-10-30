@@ -22,41 +22,35 @@
   const flipDurationMs = 300;
 </script>
 
-{#if condition}
-  <!-- {#each condition.expressions as item (item.id)}
-    {item.id} -
-  {/each} -->
-
-  <section
-    use:dndzone={{ items: condition.expressions, flipDurationMs: 300 }}
-    on:consider={handleSort}
-    on:finalize={handleSort}
-  >
-    {#each condition.expressions as expression (expression.id)}
-      <div class="relative" animate:flip={{ duration: flipDurationMs }}>
-        <!-- workaround so that elements that have a svelte component (with bindings?) don't disappear when drag/dropping-->
-        {#if expression.isDndShadowItem}
-          <div>
-            {expression.left.value.label || expression.left.value}
-            {expression.op.op}
-            {expression.right.value.label || expression.right.value}
-          </div>
-        {:else if summarize}
-          <div>
-            {expression.left.value.label || expression.left.value}
-            {expression.op.op}
-            {expression.right.value.label || expression.right.value}
-          </div>
-        {:else}
-          <RuleLine
-            item={expression}
-            collection={condition.expressions}
-            remove={() => removeExpression(expression)}
-          >
-            <Expression {expression} {condition} isRoot />
-          </RuleLine>
-        {/if}
-      </div>
-    {/each}
-  </section>
-{/if}
+<section
+  use:dndzone={{ items: condition.expressions, flipDurationMs: 300 }}
+  on:consider={handleSort}
+  on:finalize={handleSort}
+>
+  {#each condition.expressions as expression (expression.id)}
+    <div class="relative" animate:flip={{ duration: flipDurationMs }}>
+      <!-- workaround so that elements that have a svelte component (with bindings?) don't disappear when drag/dropping-->
+      {#if expression.isDndShadowItem}
+        <div>
+          {expression.left.value.label || expression.left.value}
+          {expression.op.op}
+          {expression.right.value.label || expression.right.value}
+        </div>
+      {:else if summarize}
+        <div>
+          {expression.left.value.label || expression.left.value}
+          {expression.op.op}
+          {expression.right.value.label || expression.right.value}
+        </div>
+      {:else}
+        <RuleLine
+          item={expression}
+          collection={condition.expressions}
+          remove={() => removeExpression(expression)}
+        >
+          <Expression {expression} {condition} isRoot />
+        </RuleLine>
+      {/if}
+    </div>
+  {/each}
+</section>
