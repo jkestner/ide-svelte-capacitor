@@ -29,23 +29,19 @@
   $: items.push(...$program.state_vars);
 
   function addStateVar(label) {
-    //TODO: going to need to reference count so we know when to delete a variable.
-    let label_exists =
-      label && $program.state_vars.some((v) => v.label == label);
-    if (!label_exists) {
-      let sv = new JStateVar(label);
-      $program.state_vars.push(sv);
-      $program = $program;
-      items.push(sv);
+    if (isNaN(label) && !label.startsWith("(")) {
+      //TODO: going to need to reference count so we know when to delete a variable.
+      let label_exists =
+        label && $program.state_vars.some((v) => v.label == label);
+      if (!label_exists) {
+        let sv = new JStateVar(label);
+        $program.state_vars.push(sv);
+        $program = $program;
+        items.push(sv);
+      }
+      return label;
     }
-    return label;
   }
-
-  //TODO: detect new variable vs an expression - starts with a number or parenthesis?
-  // function textClean(userEnteredText) {
-  //   console.log(userEnteredText);
-  //   return userEnteredText + "!";
-  // }
 </script>
 
 <!-- 
@@ -58,7 +54,6 @@
 <!-- TODO: restore current value to text box on blur -->
 <AutoComplete
   create="true"
-  cleanUserText="true"
   {items}
   bind:selectedItem={value}
   labelFieldName="label"
