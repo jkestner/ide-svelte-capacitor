@@ -1,4 +1,7 @@
 <script>
+  import RuleLine from "./ide/RuleLine.svelte";
+  import * as state from "@store/program.js";
+
   import GPInput from "./inputs/GPInput.svelte";
   import TemperatureInput from "./inputs/TemperatureInput.svelte";
   import HumidityInput from "./inputs/HumidityInput.svelte";
@@ -71,40 +74,50 @@
     if (c) return c.component;
     else return null;
   }
+  function removeExpression(value) {
+    //todo: make sure this is a unique item with a key
+    let b = condition.expressions.filter((obj) => obj != value);
+    condition.expressions = b;
+    state.update();
+  }
 </script>
 
-<div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
-  {#if expression.left.expr}
-    <svelte:self expression={expression.left.expr} /><br />
-    <PartPicker
-      class="h-10"
-      vocabulary={bool_operations}
-      bind:value={expression.op.op}
-    />
-  {:else}
-    <Literal bind:value={expression.left.value} />
-    <!--
-TODO: if this Literal equals a known input type, replace the rest with the input component.
--->
-    {#if expression.left.value && expression.left.value.component && selectedComponent(expression.left.value.component)}
-      <!-- show the input component here -->
-      <svelte:component
-        this={selectedComponent(expression.left.value.component)}
-      />
-    {:else}
-      <!-- show a generic input here -->
+<RuleLine
+  item={expression}
+  collection={condition.expressions}
+  remove={removeExpression(expression)}
+>
+  <div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
+    {#if expression.left.expr}
+      <svelte:self expression={expression.left.expr} /><br />
       <PartPicker
         class="h-10"
-        vocabulary={operations}
+        vocabulary={bool_operations}
         bind:value={expression.op.op}
       />
-
-      {#if expression.right.expr}
-        a
-        <!-- <svelte:self expression={expression.right.expr} /> -->
+    {:else}
+      <Literal bind:value={expression.left.value} />
+      <!-- if this Literal equals a known input type, replace the rest with the input component. -->
+      {#if expression.left.value && expression.left.value.component && selectedComponent(expression.left.value.component)}
+        <!-- show the input component here -->
+        <svelte:component
+          this={selectedComponent(expression.left.value.component)}
+        />
       {:else}
-        <Literal bind:value={expression.right.value} />
+        <!-- show a generic input here -->
+        <PartPicker
+          class="h-10"
+          vocabulary={operations}
+          bind:value={expression.op.op}
+        />
+
+        {#if expression.right.expr}
+          a
+          <!-- <svelte:self expression={expression.right.expr} /> -->
+        {:else}
+          <Literal bind:value={expression.right.value} />
+        {/if}
       {/if}
     {/if}
-  {/if}
-</div>
+  </div>
+</RuleLine>

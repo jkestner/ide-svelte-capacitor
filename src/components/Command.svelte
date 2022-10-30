@@ -1,4 +1,6 @@
 <script>
+  import RuleLine from "./ide/RuleLine.svelte";
+
   import PartPicker from "./PartPicker.svelte";
   import LedOutput from "./outputs/LedOutput.svelte";
   import EmailOutput from "./outputs/EmailOutput.svelte";

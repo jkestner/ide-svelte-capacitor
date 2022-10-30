@@ -12,13 +12,6 @@
   function handleSort(e) {
     condition.expressions = e.detail.items;
   }
-
-  async function removeExpression(value) {
-    //todo: make sure this is a unique item with a key
-    let b = condition.expressions.filter((obj) => obj != value);
-    condition.expressions = b;
-    await state.update();
-  }
   const flipDurationMs = 300;
 </script>
 
