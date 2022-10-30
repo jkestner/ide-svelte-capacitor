@@ -8,7 +8,7 @@
   export let item;
   export let collection;
   export let remove;
-  export let summarize;
+  export let summarize = false;
 
   function handleSort(e) {
     collection = e.detail.items;
