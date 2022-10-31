@@ -5,7 +5,7 @@
 </script>
 
 <textarea
-  class="w-1/2 textarea textarea-ghost text-slate-500 hover:bg-gray-50 p-1 placeholder:text-white placeholder:italic placeholder:hover:text-slate-300"
+  class="w-full textarea textarea-ghost text-slate-500 hover:bg-gray-50 p-1 placeholder:text-white placeholder:italic placeholder:hover:text-slate-300"
   rows="2"
   value={notes || ""}
   placeholder="notes"

@@ -13,6 +13,22 @@
     condition.expressions = e.detail.items;
   }
   const flipDurationMs = 300;
+
+  function removeExpression(value) {
+    //todo: make sure this is a unique item with a key
+    let b = condition.expressions.filter((obj) => obj != value);
+    condition.expressions = b;
+    state.update();
+  }
+  function summary(expression) {
+    return (
+      (expression.left.value.label || expression.left.value) +
+      " " +
+      expression.op.op +
+      " " +
+      (expression.right.value.label || expression.right.value)
+    );
+  }
 </script>
 
 <section
@@ -29,18 +45,13 @@
           {expression.op.op}
           {expression.right.value.label || expression.right.value}
         </div>
-      {:else if summarize}
-        <div>
-          {expression.left.value.label || expression.left.value}
-          {expression.op.op}
-          {expression.right.value.label || expression.right.value}
-        </div>
       {:else}
         <RuleLine
           item={expression}
           collection={condition.expressions}
           remove={() => removeExpression(expression)}
           {summarize}
+          summary={summary(expression)}
         >
           <Expression {expression} {condition} isRoot />
         </RuleLine>

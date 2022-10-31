@@ -126,18 +126,15 @@
     </div>
   </div>
   <ProgramState />
-  <button
-    class="btn btn-xs w-24"
-    class:btn-outline={summarize}
-    on:click={() => (summarize = !summarize)}>summarize</button
-  >
+
+  <div class="divider" />
 
   {#if $program.rules.length}
     {#each $program.rules as rule}
       <div class="mb-8 grid">
         <div class="flex flex-row group relative">
           <input
-            class="input text-lg placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
+            class="input w-full text-lg placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
             placeholder="rule"
             value={rule.name || ""}
             on:change={(me) => {
@@ -145,12 +142,20 @@
               $program = $program;
             }}
           />
-          <RemoveButton remove={() => removeRule(rule)} />
+          <div class="widgets">
+            <button
+              class="btn btn-ghost opacity-50 group-hover:opacity-100 btn-xs col-span-1"
+              class:btn-outline={summarize}
+              on:click={() => (summarize = !summarize)}>–</button
+            >
+            <RemoveButton remove={() => removeRule(rule)} />
+          </div>
         </div>
-        <div
-          class="sm:columns-2 card card-bordered border-2 border-accent p-2 overflow-visible"
-        >
-          <h3 class="text-xl no-animation">when</h3>
+
+        <div class="divider" />
+
+        <div class="sm:columns-2 card p-2 overflow-visible">
+          <h3 class="text-xl">when</h3>
           <div class="grid break-after-column">
             <Condition condition={rule.condition} {summarize} />
             {#if !summarize}
@@ -163,7 +168,7 @@
 
           <div class="divider" />
 
-          <h3 class="text-xl no-animation">do</h3>
+          <h3 class="text-xl">do</h3>
           <div class="grid">
             <Action action={rule.action} {summarize} />
             {#if !summarize}

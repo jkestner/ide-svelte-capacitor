@@ -31,13 +31,13 @@
     <div class="relative" animate:flip={{ duration: flipDurationMs }}>
       {#if command.isDndShadowItem}
         <div>{command.command}</div>
-      {:else if summarize}
-        <div>{command.command}</div>
       {:else}
         <RuleLine
           item={command}
           collection={action.commands}
           remove={() => removeCommand(command)}
+          {summarize}
+          summary={command.command}
         >
           <Command {command} {action} />
         </RuleLine>

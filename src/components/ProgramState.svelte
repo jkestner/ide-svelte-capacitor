@@ -36,7 +36,7 @@
       >{/if}
     <button
       class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1 z-20 -ml-6 mt-0 absolute right-1"
-      on:click={() => (collapsed = !collapsed)}>—</button
+      on:click={() => (collapsed = !collapsed)}>–</button
     >
   </div>
 

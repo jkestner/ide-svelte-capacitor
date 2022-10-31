@@ -15,7 +15,7 @@
 
 {#key refresh}
   {#if animations}
-    <div transition:slide={{ duration: 100 }}>
+    <div transition:slide={{ duration: 200 }}>
       <slot />
     </div>
   {:else}

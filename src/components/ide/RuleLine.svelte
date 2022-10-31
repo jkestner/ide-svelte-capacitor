@@ -9,6 +9,9 @@
   export let collection;
   export let remove;
   export let summarize = false;
+  export let summary = "-";
+
+  let localSummarize = false;
 
   function handleSort(e) {
     collection = e.detail.items;
@@ -24,18 +27,28 @@
   }
 </script>
 
-<div class="flex items-stretch group columns-3 hover:bg-primary relative">
-  <div class="w-2/3">
-    <slot />
+<div class="flex group hover:bg-primary relative">
+  <div class="md:w-2/3 w-full">
+    {#if summarize || localSummarize}
+      {summary}
+    {:else}
+      <slot />
+    {/if}
   </div>
-  <NotesTextarea bind:notes={item.notes} />
-  <div class="widgets w-2">
+  <div class="md:w-1/4 w-full">
+    {#if summarize || localSummarize}
+      {item.notes || ""}
+    {:else}
+      <NotesTextarea bind:notes={item.notes} />
+    {/if}
+  </div>
+  <div class="widgets flex-initial flex flex-col">
     <button
-      class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1 z-20 -ml-6 mt-0 right-1 top-1"
-      on:click={() => (summarize = !summarize)}>—</button
+      class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
+      on:click={() => (localSummarize = !localSummarize)}>–</button
     >
     <button
-      class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1 z-20 -ml-6 mt-0 right-1 top-1"
+      class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
       >=</button
     >
     <RemoveButton {remove} />
