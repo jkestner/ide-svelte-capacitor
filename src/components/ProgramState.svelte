@@ -2,7 +2,7 @@
   import { program } from "@store/program.js";
   import { JStateVar } from "../IDEObjects";
 
-  import RuleLine from "./ide/RuleLine.svelte";
+  import RuleLine from "@components/ide/RuleLine.svelte";
 
   let collapsed = false;
   let newStateVarLabel = "";

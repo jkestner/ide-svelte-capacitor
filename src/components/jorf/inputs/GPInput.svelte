@@ -1,6 +1,6 @@
 <script>
   import Input from "./Input.svelte";
-  import Literal from "@components/Literal.svelte";
+  import Literal from "@components/jorf/Literal.svelte";
 
   export let pin = 1;
   export let value = "high";

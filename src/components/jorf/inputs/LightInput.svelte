@@ -1,4 +1,5 @@
 <script>
+  import Literal from "@components/jorf/Literal.svelte";
   import Input from "./Input.svelte";
 
   export let value = 0;
@@ -11,4 +12,4 @@
   }
 </script>
 
-<Input {summary} {sample}>I am light level</Input>
+<Input {summary} {sample}><Literal {value} /></Input>

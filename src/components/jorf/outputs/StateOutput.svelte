@@ -1,6 +1,6 @@
 <script>
   import Output from "./Output.svelte";
-  import Expression from "@components/Expression.svelte";
+  import Expression from "@components/jorf/Expression.svelte";
   import VariableInserter from "@components/VariableInserter.svelte";
 
   export let params = {};

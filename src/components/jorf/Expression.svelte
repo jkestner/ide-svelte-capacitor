@@ -7,7 +7,7 @@
   import ButtonInput from "./inputs/ButtonInput.svelte";
   import LightInput from "./inputs/LightInput.svelte";
   import Literal from "./Literal.svelte";
-  import PartPicker from "./ide/PartPicker.svelte";
+  import PartPicker from "@components/ide/PartPicker.svelte";
   import IntervalInput from "./inputs/IntervalInput.svelte";
   import TimeInput from "./inputs/TimeInput.svelte";
   import RandomInput from "./inputs/RandomInput.svelte";

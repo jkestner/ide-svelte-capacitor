@@ -6,7 +6,7 @@
   import { program, undoable, redoable } from "@store/program.js";
   // import { nodes } from "@store/nodes";
 
-  import Condition from "@components/Condition.svelte";
+  import Condition from "@components/jorf/Condition.svelte";
   import NodeList from "@components/NodeList.svelte";
   import RemoveButton from "@components/ide/RemoveButton.svelte";
   import { params } from "@roxi/routify";
@@ -14,7 +14,7 @@
   import FaUndoAlt from "svelte-icons/fa/FaUndoAlt.svelte";
   import FaRedoAlt from "svelte-icons/fa/FaRedoAlt.svelte";
 
-  import Action from "@components/Action.svelte";
+  import Action from "@components/jorf/Action.svelte";
   import ProgramState from "@components/ProgramState.svelte";
 
   let localProgram;

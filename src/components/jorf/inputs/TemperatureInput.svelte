@@ -1,6 +1,6 @@
 <script>
   import Input from "./Input.svelte";
-  import Literal from "@components/Literal.svelte";
+  import Literal from "@components/jorf/Literal.svelte";
 
   export let value = 72;
 
@@ -13,6 +13,5 @@
 </script>
 
 <Input {summary} {sample}>
-  temperature range slider, f/c, etc
-  <Literal bind:value />
+  <Literal bind:value autocomplete />
 </Input>

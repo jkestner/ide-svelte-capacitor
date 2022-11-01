@@ -1,5 +1,5 @@
 <script>
-  import RuleLine from "./ide/RuleLine.svelte";
+  import RuleLine from "@components/ide/RuleLine.svelte";
 
   import * as state from "@store/program.js";
   import Expression from "./Expression.svelte";
