@@ -14,6 +14,8 @@ import { writable, readable, derived } from "svelte/store";
         this.addSensor("light");       
         this.addSensor("humidity");       
         this.addSensor("battery");     
+        this.addSensor("button");     
+        this.addSensor("pin");     
     }
 
     simulate() {

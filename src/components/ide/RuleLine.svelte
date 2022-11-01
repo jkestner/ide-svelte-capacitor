@@ -47,10 +47,10 @@
       class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
       on:click={() => (localSummarize = !localSummarize)}>–</button
     >
-    <button
+    <!-- <button
       class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
       >=</button
-    >
+    > -->
     <RemoveButton {remove} />
   </div>
 </div>

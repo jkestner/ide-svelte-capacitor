@@ -5,8 +5,7 @@
 </script>
 
 <textarea
-  class="w-full textarea textarea-ghost text-slate-500 hover:bg-gray-50 p-1 placeholder:text-white placeholder:italic placeholder:hover:text-slate-300"
-  rows="2"
+  class="textarea textarea-ghost rounded-none text-slate-500 hover:bg-gray-50 p-1 placeholder:text-white placeholder:italic placeholder:hover:text-slate-300"
   value={notes || ""}
   placeholder="notes"
   on:change={(me) => {

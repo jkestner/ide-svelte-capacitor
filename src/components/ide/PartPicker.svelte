@@ -48,7 +48,7 @@
   {:else}
     <div class="chooser flex items-baseline">
       <select
-        class="select bg-slate-100 "
+        class="select select-ghost rounded-none overflow-visible p-0"
         bind:value
         placeholder="command"
         color="accent"

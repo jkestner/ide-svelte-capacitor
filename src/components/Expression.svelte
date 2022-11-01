@@ -7,7 +7,7 @@
   import ButtonInput from "./inputs/ButtonInput.svelte";
   import LightInput from "./inputs/LightInput.svelte";
   import Literal from "./Literal.svelte";
-  import PartPicker from "./PartPicker.svelte";
+  import PartPicker from "./ide/PartPicker.svelte";
   import IntervalInput from "./inputs/IntervalInput.svelte";
   import TimeInput from "./inputs/TimeInput.svelte";
   import RandomInput from "./inputs/RandomInput.svelte";
@@ -77,33 +77,22 @@
 <div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
   {#if expression.left.expr}
     <svelte:self expression={expression.left.expr} /><br />
-    <PartPicker
-      class="h-10"
-      vocabulary={bool_operations}
-      bind:value={expression.op.op}
-    />
+    <PartPicker vocabulary={bool_operations} bind:value={expression.op.op} />
   {:else}
-    <Literal bind:value={expression.left.value} />
+    <Literal bind:value={expression.left.value} autocomplete />
     <!-- if this Literal equals a known input type, replace the rest with the input component. -->
     {#if expression.left.value && expression.left.value.component && selectedComponent(expression.left.value.component)}
+      <PartPicker vocabulary={operations} bind:value={expression.op.op} />
       <!-- show the input component here -->
       <svelte:component
         this={selectedComponent(expression.left.value.component)}
       />
-    {:else}
+    {:else if expression.right.expr}
       <!-- show a generic input here -->
-      <PartPicker
-        class="h-10"
-        vocabulary={operations}
-        bind:value={expression.op.op}
-      />
-
-      {#if expression.right.expr}
-        a
-        <!-- <svelte:self expression={expression.right.expr} /> -->
-      {:else}
-        <Literal bind:value={expression.right.value} />
-      {/if}
+      a
+      <!-- <svelte:self expression={expression.right.expr} /> -->
+    {:else}
+      <Literal bind:value={expression.right.value} />
     {/if}
   {/if}
 </div>
