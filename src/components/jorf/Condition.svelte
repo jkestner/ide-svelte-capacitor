@@ -98,6 +98,9 @@
 </section>
 
 <style>
+  .steps {
+    overflow: visible;
+  }
   .step-button {
     pointer-events: none;
   }
