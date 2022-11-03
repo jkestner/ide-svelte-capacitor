@@ -1,7 +1,7 @@
 <script>
   import { program } from "@store/program.js";
 
-  export let notes;
+  export let notes = "";
 </script>
 
 <textarea

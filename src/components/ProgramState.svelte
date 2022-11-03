@@ -27,17 +27,17 @@
   }
 </script>
 
-<section class="section p-2 relative">
+<section class="sectionrelative">
   <div class="heading">
-    <h3 class="text-xl inline-block">State</h3>
+    <h3 class="inline-block">State</h3>
     {#if collapsed}
       <em class="ml-4"
         >{$program.state_vars.length} variable{#if $program.state_vars.length !== 1}s{/if}</em
       >{/if}
-    <button
+    <!-- <button
       class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1 z-20 -ml-6 mt-0 absolute right-1"
       on:click={() => (collapsed = !collapsed)}>–</button
-    >
+    > -->
   </div>
 
   {#if !collapsed}

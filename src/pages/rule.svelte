@@ -99,16 +99,15 @@
     >
   </div>
 </div>
-<ProgramState />
-
-<div class="divider" />
 
 {#if $program.rules.length}
   {#each $program.rules as rule}
-    <div class="mb-8 grid">
-      <div class="flex flex-row group relative">
+    <div class="card mb-8 grid">
+      <div
+        class="flex peer group hover:bg-primary hover:bg-opacity-20 border-b-2"
+      >
         <input
-          class="input w-full text-xl placeholder-slate-500 placeholder-opacity-50 hover:placeholder-opacity-50"
+          class="input input-ghost w-full text-xl placeholder-slate-500 placeholder-opacity-50 hover:placeholder-opacity-50"
           placeholder="rule"
           value={rule.name || ""}
           on:change={(me) => {
@@ -126,17 +125,14 @@
         </div>
       </div>
 
-      <div class="divider" />
-
-      <div class="sm:columns-2 card p-2 overflow-visible">
-        <h3 class="text-lg">when</h3>
+      <div
+        class="p-2 overflow-visible peer-hover:bg-primary peer-hover:bg-opacity-20"
+      >
+        <h3 class="heading">when</h3>
         <div class="grid break-after-column">
           <Condition condition={rule.condition} {summarize} />
         </div>
-
-        <div class="divider" />
-
-        <h3 class="text-lg">do</h3>
+        <h3 class="heading">do</h3>
         <div class="grid">
           <Action action={rule.action} {summarize} />
         </div>
@@ -148,8 +144,15 @@
 {/if}
 <button class="btn" on:click={(event) => addRule()}>+ rule</button>
 
-<h3 class="text-xl mt-10">Uses nodes</h3>
-<NodeList />
+<div class="divider" />
+
+<div class="flex">
+  <div class="w-1/2"><ProgramState /></div>
+  <div class="w-1/2">
+    <h3 class="heading">Uses nodes</h3>
+    <NodeList />
+  </div>
+</div>
 
 <style>
 </style>

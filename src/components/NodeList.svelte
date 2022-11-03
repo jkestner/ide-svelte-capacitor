@@ -38,7 +38,7 @@
         <h2 class="w-40 card-title">
           {node.label}
         </h2>
-        <div class="flex w-1/3 bg-primary text-primary-content rounded-xl">
+        <div class="flex bg-primary text-primary-content rounded-xl">
           <div class="stat stat-value text-base">
             {node.sensors[0].value / 100}ºF
           </div>
