@@ -2,13 +2,14 @@
   import Literal from "@components/jorf/Literal.svelte";
   import Input from "./Input.svelte";
 
-  export let value = 0;
+  export let value;
 
   export function summary() {
-    return "humidity " + value;
+    return "battery " + value;
   }
   function sample() {
-    console.log("sampling humdity");
+    //TODO: make clear that sampling will just get the lefthand sensor's current value. disable if it's not a dynamic value.
+    value = Math.floor(Math.random() * 100) * 10;
   }
 </script>
 

@@ -31,13 +31,15 @@
 </script>
 
 <div class="card m-1">
-  <h2 class="card-title">{node.name}</h2>
+  <h2 class="card-title">
+    {node.label} <span class="opacity-40">#{node.id}</span>
+  </h2>
   <div class="card-body">
     <div class="flex bg-primary text-primary-content rounded-xl">
       {#each node.sensors as sensor}
         <div class="stat">
           <div class="stat-title">
-            {sensor.name}
+            {sensor.label}
           </div>
           <div class="stat-value">
             {sensor.value}

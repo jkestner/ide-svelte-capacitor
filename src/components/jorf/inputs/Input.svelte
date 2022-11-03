@@ -1,8 +1,8 @@
-<!-- wrapper for all output components -->
+<!-- wrapper for all input components -->
 <script>
   import Popdown from "@components/transitions/Popdown.svelte";
   import FaEyeDropper from "svelte-icons/fa/FaEyeDropper.svelte";
-  export let summary;
+
   export let sample = undefined; //sample function
 </script>
 

@@ -14,5 +14,5 @@
 </script>
 
 <Input {summary} {sample}>
-  <Literal bind:value={pin} />
+  <Literal bind:value={pin} autocomplete />
 </Input>

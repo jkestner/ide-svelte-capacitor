@@ -6,6 +6,7 @@
   import HumidityInput from "./inputs/HumidityInput.svelte";
   import ButtonInput from "./inputs/ButtonInput.svelte";
   import LightInput from "./inputs/LightInput.svelte";
+  import BatteryInput from "./inputs/BatteryInput.svelte";
   import Literal from "./Literal.svelte";
   import PartPicker from "@components/ide/PartPicker.svelte";
   import IntervalInput from "./inputs/IntervalInput.svelte";
@@ -48,6 +49,16 @@
       value: "button",
       component: ButtonInput,
     },
+    {
+      label: "Pin",
+      value: "pin",
+      component: GPInput,
+    },
+    {
+      label: "Battery",
+      value: "battery",
+      component: BatteryInput,
+    },
   ];
   // need some standardized concept/ui of how precise these are. range slider? fuzziness
   const operations = [
@@ -80,7 +91,7 @@
     <PartPicker vocabulary={bool_operations} bind:value={expression.op.op} />
   {:else}
     <Literal bind:value={expression.left.value} autocomplete />
-    <!-- if this Literal equals a known input type, replace the rest with the input component. -->
+    <!-- if that Literal equals a known input type, replace the rest with the input component. -->
     {#if expression.left.value && expression.left.value.component && selectedComponent(expression.left.value.component)}
       <PartPicker vocabulary={operations} bind:value={expression.op.op} />
       <!-- show the input component here -->

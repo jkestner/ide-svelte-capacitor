@@ -2,7 +2,7 @@
   import Literal from "@components/jorf/Literal.svelte";
   import Input from "./Input.svelte";
 
-  export let value = 0;
+  export let value;
 
   export function summary() {
     return "light " + value;
@@ -12,4 +12,6 @@
   }
 </script>
 
-<Input {summary} {sample}><Literal {value} /></Input>
+<Input {summary} {sample}>
+  <Literal bind:value autocomplete />
+</Input>
