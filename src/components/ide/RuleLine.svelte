@@ -5,9 +5,13 @@
   import { dndzone } from "svelte-dnd-action";
   import { flip } from "svelte/animate";
 
+  let className = "";
+  export { className as class };
+
   export let item;
   export let collection;
   export let remove;
+  export let draggable = false;
   export let summarize = false;
   export let summary = "-";
 
@@ -27,7 +31,14 @@
   }
 </script>
 
-<div class="flex group hover:bg-primary hover:bg-opacity-10 relative">
+<div
+  class="md:flex group hover:bg-primary hover:bg-opacity-10 relative {$$props.class}"
+>
+  {#if draggable}
+    <div class="widgets">
+      <div class="opacity-0 group-hover:opacity-50">=</div>
+    </div>
+  {/if}
   <div class="md:w-2/3 w-full" class:opacity-20={item.comment}>
     {#if summarize || localSummarize}
       {summary}
@@ -42,21 +53,30 @@
       <NotesTextarea bind:notes={item.notes} />
     {/if}
   </div>
-  <div class="widgets flex-initial flex flex-col">
+  <div class="widgets">
     <!-- <button
-      class="btn no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
+      class="btn opacity-50 group-hover:opacity-100 btn-xs"
       class:btn-ghost={!localSummarize}
       on:click={() => (localSummarize = !localSummarize)}>–</button
     > -->
     <button
-      class="btn no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
+      class="btn opacity-50 group-hover:opacity-100 btn-xs"
       class:btn-ghost={!item.commented}
       on:click={() => (item.comment = !item.comment)}>//</button
     >
-    <!-- <button
-      class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
-      >=</button
-    > -->
     <RemoveButton {remove} />
   </div>
 </div>
+
+<style>
+  .widgets {
+    flex: 0 1 auto;
+    width: 2.75rem;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .widgets {
+      width: 1.25rem;
+    }
+  }
+</style>
