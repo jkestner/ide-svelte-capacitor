@@ -27,8 +27,8 @@
   }
 </script>
 
-<div class="flex group hover:bg-primary relative">
-  <div class="md:w-2/3 w-full">
+<div class="flex group hover:bg-primary hover:bg-opacity-10 relative">
+  <div class="md:w-2/3 w-full" class:opacity-20={item.comment}>
     {#if summarize || localSummarize}
       {summary}
     {:else}
@@ -43,9 +43,15 @@
     {/if}
   </div>
   <div class="widgets flex-initial flex flex-col">
-    <button
-      class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
+    <!-- <button
+      class="btn no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
+      class:btn-ghost={!localSummarize}
       on:click={() => (localSummarize = !localSummarize)}>–</button
+    > -->
+    <button
+      class="btn no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
+      class:btn-ghost={!item.commented}
+      on:click={() => (item.comment = !item.comment)}>//</button
     >
     <!-- <button
       class="btn btn-ghost no-animation opacity-50 group-hover:opacity-100 btn-xs col-span-1"
