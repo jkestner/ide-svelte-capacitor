@@ -15,6 +15,7 @@
   let nodeItems = [];
   let createText = "Add this state variable";
 
+  // Populating autocomplete menu with, basically, JLiteral objects
   //TODO: is this reactive? needs to be
   $nodes.forEach((n) => {
     n.sensors.forEach((s) =>
@@ -23,6 +24,8 @@
         description: s.value,
         value: s.label,
         component: s.label,
+        node: n.id,
+        nodeName: n.label,
       })
     );
   });
@@ -57,9 +60,9 @@
     onCreate={addStateVar}
     {createText}
     hideArrow
-    class="p-2 bg-slate-50  w-auto"
+    class="p-2 bg-slate-50 w-auto"
   >
-    <div slot="item" let:item let:label>
+    <div slot="item" let:item let:label class="text-left">
       {@html label}
       <!-- {#if item.description}
         <span class="align-right">{item.description}</span>

@@ -4,6 +4,7 @@ import { writable, readable, derived } from "svelte/store";
 
   class Node {
     constructor(label) {
+        this.id = Math.floor(Math.random()*999);
         this.label = label;
         this.sensorPollingRate = 1; // in seconds
         this.sensors = [];
