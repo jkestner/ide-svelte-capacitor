@@ -1,6 +1,7 @@
 <!-- wrapper for all output components -->
 <script>
   import Popdown from "@components/transitions/Popdown.svelte";
+  import FaCompressArrowsAlt from "svelte-icons/fa/FaCompressArrowsAlt.svelte";
 
   export let summary;
   export let test = undefined; //test function
@@ -8,13 +9,12 @@
 </script>
 
 <Popdown>
-  <!-- <div class="card flex items-stretch grid-cols-1 ml-3"> -->
-  <slot />
-  <!-- </div> -->
-
-  <div class="card-actions">
+  <div class="input-group">
+    <slot />
     {#if test}
-      <button class="btn btn-outline btn-xs" on:click={test}>test</button>
+      <button class="btn btn-ghost w-14" on:click={test}
+        ><FaCompressArrowsAlt /></button
+      >
     {/if}
   </div>
 </Popdown>

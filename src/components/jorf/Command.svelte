@@ -55,9 +55,10 @@
 
   export let command;
   export let action;
+  export let isRoot = false;
 </script>
 
-<div class="mb-2">
+<div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
   <PartPicker
     vocabulary={commands}
     bind:value={command.command}

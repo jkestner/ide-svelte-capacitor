@@ -49,15 +49,15 @@
 <!-- TODO: restore current value to text box on blur -->
 {#if autocomplete}
   <AutoComplete
-    create="true"
     {items}
     bind:selectedItem={value}
     labelFieldName="label"
     valueFieldName="value"
+    create
     onCreate={addStateVar}
     {createText}
     hideArrow
-    class="p-2 bg-slate-50 select w-auto"
+    class="p-2 bg-slate-50  w-auto"
   >
     <div slot="item" let:item let:label>
       {@html label}
@@ -69,7 +69,7 @@
 {:else}
   <input
     type="text"
-    bind:value={value.label}
+    bind:value
     class="input outline-none outline-0 p-2 bg-slate-50 flex-auto rounded-none"
   />
 {/if}

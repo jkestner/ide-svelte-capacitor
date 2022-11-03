@@ -53,7 +53,7 @@
             v.label = me.target.value;
             $program = $program;
           }}
-          class="input input-ghost text-lg placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
+          class="input input-sm input-ghost placeholder-slate-50 placeholder-opacity-0 hover:placeholder-opacity-50"
         />: {@html v.value || "<em>no value</em>"}
       </RuleLine>
     {/each}
@@ -61,10 +61,11 @@
       <input
         bind:value={newStateVarLabel}
         on:keyup={(e) => e.key === "Enter" && addStateVar(newStateVarLabel)}
-        class="input input-bordered border-0 border-b-2 text-lg placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
+        placeholder="Add a variable"
+        class="input input-sm bg-slate-50 border-0 placeholder-slate-500 placeholder-opacity-50 hover:placeholder-opacity-50"
       />
       <button
-        class="btn w-24"
+        class="btn btn-sm"
         on:click={(event) => addStateVar(newStateVarLabel)}
         disabled={isDisabled}>+</button
       >

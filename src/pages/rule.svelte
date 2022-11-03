@@ -133,7 +133,7 @@
     <div class="mb-8 grid">
       <div class="flex flex-row group relative">
         <input
-          class="input w-full text-lg placeholder-gray-100 placeholder-opacity-0 hover:placeholder-opacity-50"
+          class="input w-full text-xl placeholder-slate-500 placeholder-opacity-50 hover:placeholder-opacity-50"
           placeholder="rule"
           value={rule.name || ""}
           on:change={(me) => {
@@ -154,12 +154,12 @@
       <div class="divider" />
 
       <div class="sm:columns-2 card p-2 overflow-visible">
-        <h3 class="text-xl">when</h3>
+        <h3 class="text-lg">when</h3>
         <div class="grid break-after-column">
           <Condition condition={rule.condition} {summarize} />
           {#if !summarize}
             <button
-              class="btn w-24"
+              class="btn btn-primary w-16"
               on:click={(event) => addExpression(rule.condition)}>+</button
             >
           {/if}
@@ -167,12 +167,12 @@
 
         <div class="divider" />
 
-        <h3 class="text-xl">do</h3>
+        <h3 class="text-lg">do</h3>
         <div class="grid">
           <Action action={rule.action} {summarize} />
           {#if !summarize}
             <button
-              class="btn w-24"
+              class="btn btn-primary w-16"
               on:click={(event) => addCommand(rule.action)}>+</button
             >
           {/if}

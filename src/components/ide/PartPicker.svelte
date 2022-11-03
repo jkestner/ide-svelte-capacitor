@@ -17,7 +17,7 @@
   }
 </script>
 
-<div class="card p-1 flex {$$props.class}" class:w-full={selected().component}>
+<div class="flex {$$props.class}" class:w-full={selected().component}>
   {#if swiper}
     swiper
     <!-- <swiper
@@ -48,7 +48,7 @@
   {:else}
     <div class="chooser flex items-baseline">
       <select
-        class="select select-ghost rounded-none overflow-visible p-0"
+        class="select select-ghost rounded-none overflow-visible"
         bind:value
         placeholder="command"
         color="accent"

@@ -10,7 +10,7 @@
   <div class="input-group">
     <slot />
     {#if sample}
-      <button class="btn btn-outline w-14" on:click={sample}
+      <button class="btn btn-ghost w-14" on:click={sample}
         ><FaEyeDropper /></button
       >
     {/if}

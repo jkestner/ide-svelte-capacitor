@@ -39,7 +39,7 @@
           {summarize}
           summary={command.command}
         >
-          <Command {command} {action} />
+          <Command {command} {action} isRoot />
         </RuleLine>
       {/if}
     </div>
