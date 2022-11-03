@@ -69,31 +69,6 @@
     localProgram.rules.splice(localProgram.rules.indexOf(rule), 1);
     $program = localProgram;
   }
-
-  async function addExpression(condition) {
-    condition.expressions.push({
-      id: Math.floor(Math.random() * 999),
-      left: {
-        value: "temp",
-      },
-      op: {
-        op: ">",
-      },
-      right: {
-        value: "72",
-      },
-    });
-    $program = localProgram;
-  }
-
-  async function addCommand(action) {
-    action.commands.push({
-      id: Math.floor(Math.random() * 999),
-      command: "sms",
-      params: { to: "602", content: "texto" },
-    });
-    $program = localProgram;
-  }
 </script>
 
 <div class="flex flex-row justify-between items-center">
@@ -157,12 +132,6 @@
         <h3 class="text-lg">when</h3>
         <div class="grid break-after-column">
           <Condition condition={rule.condition} {summarize} />
-          {#if !summarize}
-            <button
-              class="btn btn-primary w-16"
-              on:click={(event) => addExpression(rule.condition)}>+</button
-            >
-          {/if}
         </div>
 
         <div class="divider" />
@@ -170,12 +139,6 @@
         <h3 class="text-lg">do</h3>
         <div class="grid">
           <Action action={rule.action} {summarize} />
-          {#if !summarize}
-            <button
-              class="btn btn-primary w-16"
-              on:click={(event) => addCommand(rule.action)}>+</button
-            >
-          {/if}
         </div>
       </div>
     </div>

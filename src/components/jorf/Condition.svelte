@@ -2,6 +2,7 @@
   import RuleLine from "@components/ide/RuleLine.svelte";
 
   import * as state from "@store/program.js";
+  import { program } from "@store/program.js";
   import Expression from "./Expression.svelte";
   import { dndzone } from "svelte-dnd-action";
   import { flip } from "svelte/animate";
@@ -9,10 +10,27 @@
   export let condition;
   export let summarize;
 
+  const flipDurationMs = 300;
+  let dragDisabled = false;
   function handleSort(e) {
     condition.expressions = e.detail.items;
   }
-  const flipDurationMs = 300;
+
+  async function addExpression(condition) {
+    condition.expressions.push({
+      id: Math.floor(Math.random() * 999),
+      left: {
+        value: "temp",
+      },
+      op: {
+        op: ">",
+      },
+      right: {
+        value: "72",
+      },
+    });
+    $program = $program;
+  }
 
   function removeExpression(value) {
     //todo: make sure this is a unique item with a key
@@ -32,12 +50,17 @@
 </script>
 
 <section
-  use:dndzone={{ items: condition.expressions, flipDurationMs: 300 }}
+  use:dndzone={{ items: condition.expressions, flipDurationMs, dragDisabled }}
   on:consider={handleSort}
   on:finalize={handleSort}
+  class="steps steps-vertical"
 >
   {#each condition.expressions as expression (expression.id)}
-    <div class="relative" animate:flip={{ duration: flipDurationMs }}>
+    <div
+      class="relative step"
+      data-content=""
+      animate:flip={{ duration: flipDurationMs }}
+    >
       <!-- workaround so that elements that have a svelte component (with bindings?) don't disappear when drag/dropping-->
       {#if expression.isDndShadowItem}
         <div>
@@ -58,4 +81,27 @@
       {/if}
     </div>
   {/each}
+  {#if !summarize}
+    <!-- This is a bit hacky to make a button step. This should go away when we replace DaisyUI and write our own steps UI.
+      Or should we not require a button, and just have another dropdown, adding item when picked?
+
+    We disable drag on this item and add custom appearance. Events are now attached to ::after.
+    -->
+    <div
+      class="step step-neutral hover:step-primary cursor-pointer step-button"
+      data-content="+"
+      on:mouseenter={(event) => (dragDisabled = true)}
+      on:mouseleave={(event) => (dragDisabled = false)}
+      on:click={(event) => addExpression(condition)}
+    />
+  {/if}
 </section>
+
+<style>
+  .step-button {
+    pointer-events: none;
+  }
+  .step-button::after {
+    pointer-events: all;
+  }
+</style>
