@@ -1,4 +1,5 @@
 <script>
+  import Literal from "@components/jorf/Literal.svelte";
   import Input from "./Input.svelte";
 
   export let position = 1;
@@ -12,4 +13,6 @@
   }
 </script>
 
-<Input {summary} {sample}>I am a button</Input>
+<Input {sample}>
+  <Literal bind:value autocomplete vocabulary={opMenu} />
+</Input>

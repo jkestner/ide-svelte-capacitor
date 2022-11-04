@@ -9,4 +9,4 @@
   function sample() {}
 </script>
 
-<Input {summary} {sample}>I am random</Input>
+<Input {sample}>I am random</Input>

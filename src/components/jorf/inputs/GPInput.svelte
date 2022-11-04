@@ -13,6 +13,6 @@
   }
 </script>
 
-<Input {summary} {sample}>
+<Input {sample}>
   <Literal bind:value={pin} autocomplete />
 </Input>

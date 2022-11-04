@@ -3,7 +3,6 @@
   import Popdown from "@components/transitions/Popdown.svelte";
   import FaCompressArrowsAlt from "svelte-icons/fa/FaCompressArrowsAlt.svelte";
 
-  export let summary;
   export let test = undefined; //test function
   export let parameters = {};
 </script>

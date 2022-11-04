@@ -104,7 +104,7 @@
   {#each $program.rules as rule}
     <div class="card mb-8 grid">
       <div
-        class="flex peer group hover:bg-primary hover:bg-opacity-20 border-b-2"
+        class="flex w-full peer group hover:bg-primary hover:bg-opacity-20 border-b-2"
       >
         <input
           class="input input-ghost w-full text-xl placeholder-slate-500 placeholder-opacity-50 hover:placeholder-opacity-50"
@@ -115,7 +115,7 @@
             $program = $program;
           }}
         />
-        <div class="widgets">
+        <div class="widgets flex-none w-7">
           <button
             class="btn btn-ghost opacity-50 group-hover:opacity-100 btn-xs col-span-1"
             class:btn-outline={summarize}

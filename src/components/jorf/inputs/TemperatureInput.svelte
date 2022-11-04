@@ -2,7 +2,7 @@
   import Input from "./Input.svelte";
   import Literal from "@components/jorf/Literal.svelte";
 
-  export let value = 72;
+  export let value;
 
   export function summary() {
     return "temperature " + value;
@@ -12,6 +12,6 @@
   }
 </script>
 
-<Input {summary} {sample}>
+<Input {sample}>
   <Literal bind:value autocomplete />
 </Input>

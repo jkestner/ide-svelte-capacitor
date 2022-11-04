@@ -32,7 +32,7 @@
 </script>
 
 <div
-  class="md:flex group hover:bg-primary hover:bg-opacity-10 relative {$$props.class}"
+  class="md:flex w-full group hover:bg-primary hover:bg-opacity-10 {$$props.class}"
 >
   {#if draggable}
     <div class="widgets">
@@ -46,7 +46,7 @@
       <slot />
     {/if}
   </div>
-  <div class="md:w-1/4 w-full">
+  <div class="md:w-1/3 w-full">
     {#if summarize || localSummarize}
       {item.notes || ""}
     {:else}

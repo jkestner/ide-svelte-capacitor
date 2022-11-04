@@ -12,6 +12,6 @@
   }
 </script>
 
-<Input {summary} {sample}>
+<Input {sample}>
   <Literal bind:value autocomplete />
 </Input>

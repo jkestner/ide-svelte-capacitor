@@ -12,15 +12,15 @@
   }
 </script>
 
-<Output {test} {summary}>
-  <label class="input-group" style="width: auto; float: left">
+<Output {test}>
+  <label class="input-group">
     <span>Method</span>
     <select type="text" class="select" bind:value={params.method}>
       <option>POST</option>
       <option>GET</option>
     </select>
   </label>
-  <label class="input-group" style="width: auto; float: left">
+  <label class="input-group ml-2">
     <span>URL</span>
     <input
       type="text"

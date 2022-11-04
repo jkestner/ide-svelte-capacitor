@@ -11,17 +11,17 @@
   }
 </script>
 
-<Output {test} {summary}>
-  <label class="input-group" style="width: auto; float: left">
+<Output {test}>
+  <label class="input-group">
     <span>Account</span>
     <input
       type="text"
       placeholder="@supermechanical"
-      class="input input-bordered"
+      class="input input-bordered w-48"
       bind:value={params.account}
     />
   </label>
-  <label class="input-group" style="width: auto; float: left">
+  <label class="input-group ml-2">
     <label class="input-group">
       <span>Tweet</span>
       <textarea

@@ -1,7 +1,6 @@
 <script>
   import Output from "./Output.svelte";
 
-  export let value = null;
   export let params = { to: "", content: "" };
 
   export function summary() {
@@ -12,18 +11,18 @@
   }
 </script>
 
-<Output {test} {summary}>
-  <label class="input-group" style="width: auto; float: left">
+<Output {test}>
+  <label class="input-group">
     <span>To</span>
     <input
       type="text"
       placeholder="512-555-1111"
-      class="input input-bordered"
+      class="input input-bordered w-36"
       bind:value={params.to}
       on:blur={test}
     />
   </label>
-  <label class="input-group" style="width: auto; float: left">
+  <label class="input-group ml-2">
     <span>Content</span>
     <textarea
       type="text"

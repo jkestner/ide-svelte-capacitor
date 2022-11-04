@@ -75,7 +75,6 @@
     { label: "or", value: "or" },
   ];
   export let expression;
-  export let condition;
   export let isRoot = false;
 
   function selectedComponent(componentName) {
