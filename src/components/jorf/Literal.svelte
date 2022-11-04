@@ -32,18 +32,30 @@
   $: items.push(...nodeItems);
   $: items.push(...$program.state_vars);
 
+  function isAddableStateVar(label) {
+    return isNaN(label) && !label.startsWith("(");
+  }
   function addStateVar(label) {
-    if (isNaN(label) && !label.startsWith("(")) {
-      //TODO: going to need to reference count so we know when to delete a variable.
-      let label_exists =
-        label && $program.state_vars.some((v) => v.label == label);
-      if (!label_exists) {
-        let sv = new JStateVar(label);
+    //TODO: going to need to reference count so we know when to delete a variable.
+    let label_exists =
+      label && $program.state_vars.some((v) => v.label == label);
+    if (!label_exists) {
+      let sv = { label: label };
+
+      if (isAddableStateVar(label)) {
+        // add state var
         $program.state_vars.push(sv);
         $program = $program;
-        items.push(sv);
+      } else {
+        // set value to a number or mathematical expression
+        sv.value = sv.label;
+        value = sv;
+        $program = $program;
       }
-      return label;
+      userItems.push(sv);
+      items.push(...userItems);
+      items = items;
+      return sv;
     }
   }
 </script>
@@ -53,6 +65,7 @@
 {#if autocomplete}
   <AutoComplete
     {items}
+    value={() => this.selectedItem.value || this.selectedItem}
     bind:selectedItem={value}
     labelFieldName="label"
     valueFieldName="value"
