@@ -3,6 +3,7 @@
 
   export let vocabulary;
   export let value = undefined;
+  export let labelProperty = "label";
   export let params = undefined;
   export let swiper = false;
   export let palette = false;
@@ -40,7 +41,7 @@
           class="btn"
           type="radio"
           bind:group={value}
-          data-title={a.label}
+          data-title={a[labelProperty]}
           value={a.value}
         />
       {/each}
@@ -55,7 +56,7 @@
       >
         {#each vocabulary as a}
           <option value={a.value} selected={selected().value == a.value}
-            >{a.label}</option
+            >{a[labelProperty]}</option
           >
         {/each}
       </select>

@@ -62,17 +62,17 @@
   ];
   // need some standardized concept/ui of how precise these are. range slider? fuzziness
   const operations = [
-    { label: "equals", value: "==" },
-    { label: "is greater than", value: ">" },
-    { label: "is less than", value: "<" },
-    { label: "doesn't equal", value: "!=" },
-    { label: "changes by", value: "↕︎" },
-    { label: "rises by", value: "ꜛ" },
-    { label: "falls by", value: "ꜜ" },
+    { label: "equals", labelDev: "==", value: "==" },
+    { label: "is greater than", labelDev: ">", value: ">" },
+    { label: "is less than", labelDev: "<", value: "<" },
+    { label: "doesn't equal", labelDev: "!=", value: "!=" },
+    { label: "changes by", labelDev: "↕︎", value: "↕︎" },
+    { label: "rises by", labelDev: "ꜛ", value: "ꜛ" },
+    { label: "falls by", labelDev: "ꜜ", value: "ꜜ" },
   ];
   const bool_operations = [
-    { label: "and", value: "and" },
-    { label: "or", value: "or" },
+    { label: "and", labelDev: "&&", value: "and" },
+    { label: "or", labelDev: "||", value: "or" },
   ];
   export let expression;
   export let isRoot = false;
@@ -90,19 +90,24 @@
     <PartPicker vocabulary={bool_operations} bind:value={expression.op.op} />
   {:else}
     <Literal bind:value={expression.left.value} autocomplete />
+    <PartPicker
+      vocabulary={operations}
+      labelProperty="labelDev"
+      bind:value={expression.op.op}
+    />
     <!-- if that Literal equals a known input type, replace the rest with the input component. -->
     {#if expression.left.value && expression.left.value.component && selectedComponent(expression.left.value.component)}
-      <PartPicker vocabulary={operations} bind:value={expression.op.op} />
       <!-- show the input component here -->
       <svelte:component
         this={selectedComponent(expression.left.value.component)}
+        bind:value={expression.right.value}
       />
     {:else if expression.right.expr}
       <!-- show a generic input here -->
-      a
+      (right expression)
       <!-- <svelte:self expression={expression.right.expr} /> -->
     {:else}
-      <Literal bind:value={expression.right.value} />
+      <Literal bind:value={expression.right.value.value} />
     {/if}
   {/if}
 </div>
