@@ -1,5 +1,7 @@
 <script>
   import PartPicker from "@components/ide/PartPicker.svelte";
+  import Literal from "./Literal.svelte";
+  import { nodes } from "@store/nodes";
 
   import LedOutput from "./outputs/LedOutput.svelte";
   import EmailOutput from "./outputs/EmailOutput.svelte";
@@ -10,11 +12,21 @@
   import StateOutput from "./outputs/StateOutput.svelte";
   import HTTPOutput from "./outputs/HTTPOutput.svelte";
 
-  const commands = [
+  const outputs = [
     {
       label: "LED",
       value: "led",
       component: LedOutput,
+    },
+    {
+      label: "Set pin",
+      value: "gpout",
+      component: GPOutput,
+    },
+    {
+      label: "Set relay",
+      value: "relay",
+      component: GPOutput,
     },
     {
       label: "Email",
@@ -25,11 +37,6 @@
       label: "Log",
       value: "log",
       component: LogOutput,
-    },
-    {
-      label: "Set pin",
-      value: "gpout",
-      component: GPOutput,
     },
     {
       label: "Tweet",
@@ -54,14 +61,38 @@
   ];
 
   export let command;
-  export let action;
   export let isRoot = false;
+
+  // Populating autocomplete menu with, basically, JLiteral objects
+  //TODO: is this reactive? needs to be
+  let nodeOutputs = [];
+  $nodes.forEach((n) => {
+    n.actuators.forEach((s) =>
+      nodeOutputs.push({
+        label: s.label,
+        description: s.label,
+        value: s.label,
+        component: s.label,
+        node: n.id,
+        nodeName: n.label,
+      })
+    );
+  });
+
+  function selectedComponent(componentName) {
+    let c = outputs.find((i) => i.value == componentName);
+    if (c) return c.component;
+    else return null;
+  }
 </script>
 
 <div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
-  <PartPicker
-    vocabulary={commands}
-    bind:value={command.command}
-    bind:params={command.params}
-  />
+  <Literal autocomplete vocabulary={nodeOutputs} bind:value={command.command} />
+  {#if selectedComponent(command.command.value)}
+    <svelte:component
+      this={selectedComponent(command.command.value)}
+      bind:value={command.value}
+      bind:params={command.params}
+    />
+  {/if}
 </div>

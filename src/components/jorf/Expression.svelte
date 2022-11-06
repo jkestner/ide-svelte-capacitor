@@ -1,5 +1,6 @@
 <script>
   import * as state from "@store/program.js";
+  import { nodes } from "@store/nodes";
 
   import GPInput from "./inputs/GPInput.svelte";
   import TemperatureInput from "./inputs/TemperatureInput.svelte";
@@ -77,6 +78,22 @@
   export let expression;
   export let isRoot = false;
 
+  // Populating autocomplete menu with, basically, JLiteral objects
+  //TODO: is this reactive? needs to be
+  let nodeInputs = [];
+  $nodes.forEach((n) => {
+    n.sensors.forEach((s) =>
+      nodeInputs.push({
+        label: s.label,
+        description: s.value,
+        value: s.label,
+        component: s.label,
+        node: n.id,
+        nodeName: n.label,
+      })
+    );
+  });
+
   function selectedComponent(componentName) {
     let c = inputs.find((i) => i.value == componentName);
     if (c) return c.component;
@@ -89,7 +106,11 @@
     <svelte:self expression={expression.left.expr} /><br />
     <PartPicker vocabulary={bool_operations} bind:value={expression.op.op} />
   {:else}
-    <Literal bind:value={expression.left.value} autocomplete />
+    <Literal
+      bind:value={expression.left.value}
+      autocomplete
+      vocabulary={nodeInputs}
+    />
     <PartPicker
       vocabulary={operations}
       labelProperty="labelDev"

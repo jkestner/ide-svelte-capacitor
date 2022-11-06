@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import AutoComplete from "simple-svelte-autocomplete";
   import { nodes } from "@store/nodes";
   import { program } from "@store/program";
@@ -6,31 +7,15 @@
 
   export let value;
   export let autocomplete = false;
+  export let vocabulary = [];
 
-  let items = [
+  $: items = [
     { label: "every", component: "IntervalInput" },
     { label: "time", component: "TimeInput" },
     { label: "random", component: "RandomInput" },
   ];
-  let nodeItems = [];
   let createText = "Add this state variable";
-
-  // Populating autocomplete menu with, basically, JLiteral objects
-  //TODO: is this reactive? needs to be
-  $nodes.forEach((n) => {
-    n.sensors.forEach((s) =>
-      nodeItems.push({
-        label: n.label + "." + s.label,
-        description: s.value,
-        value: s.label,
-        component: s.label,
-        node: n.id,
-        nodeName: n.label,
-      })
-    );
-  });
-  $: items.push(...nodeItems);
-  $: items.push(...$program.state_vars);
+  let userItems = [];
 
   function isAddableStateVar(label) {
     return isNaN(label) && !label.startsWith("(");
@@ -58,6 +43,18 @@
       return sv;
     }
   }
+
+  onMount(async () => {
+    myInput = document.getElementById(myId);
+    myInput.autocomplete = "off";
+
+    if (autocomplete) {
+      items.push(...vocabulary);
+    }
+    items.push(...$program.state_vars);
+    items.push(...userItems);
+    items = items;
+  });
 </script>
 
 <!-- TODO: call addStateVar on blur, passing the new item. Until then, -->

@@ -8,6 +8,7 @@ import { writable, readable, derived } from "svelte/store";
         this.label = label;
         this.sensorPollingRate = 1; // in seconds
         this.sensors = [];
+        this.actuators = [];
         this.log = [];
         this.lastUpdated = new Date();
 
@@ -16,7 +17,12 @@ import { writable, readable, derived } from "svelte/store";
         this.addSensor("humidity");       
         this.addSensor("battery");     
         this.addSensor("button");     
-        this.addSensor("pin");     
+        this.addSensor("pin");
+        
+        this.addActuator("led");
+        this.addActuator("pin");
+        if (Math.random() < .5)
+          this.addActuator("relay");
     }
 
     simulate() {
@@ -34,6 +40,14 @@ import { writable, readable, derived } from "svelte/store";
         inputClass: "GPInput" //use this to dynamically load appropriate UI such as constraints for the possible values (i.e. slider with range)
       })
     }
+
+    addActuator(label) {
+      this.actuators.push({
+        label: label,
+        // value: Math.floor(Math.random()*400+100)*10,
+        outputClass: "GPOutput" //use this to dynamically load appropriate UI such as constraints for the possible values (i.e. slider with range)
+      })
+    }
 }
 
 export const nodes = writable([ new Node("Garden SW"), new Node("Garden NW"), new Node("Coop"), new Node("Tank")]);
@@ -48,4 +62,4 @@ setInterval(() => {
     });
     return current;
   });
-}, 1000);
+}, 5000);
