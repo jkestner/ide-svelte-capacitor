@@ -6,19 +6,24 @@
 
   let collapsed = false;
   let newStateVarLabel = "";
-  $: isDisabled = newStateVarLabel.length == 0;
+  $: isDisabled =
+    newStateVarLabel.length == 0 ||
+    !isNaN(newStateVarLabel) ||
+    newStateVarLabel.startsWith("(");
 
   function addStateVar(label) {
-    //TODO: going to need to reference count so we know when to delete a variable.
-    let label_exists =
-      label && $program.state_vars.some((v) => v.label == label);
-    if (!label_exists) {
-      let sv = new JStateVar(label);
-      $program.state_vars.push(sv);
-      $program = $program;
+    if (isNaN(label) && !label.startsWith("(")) {
+      //TODO: going to need to reference count so we know when to delete a variable.
+      let label_exists =
+        label && $program.state_vars.some((v) => v.label == label);
+      if (!label_exists) {
+        let sv = new JStateVar(label);
+        $program.state_vars.push(sv);
+        $program = $program;
+      }
+      newStateVarLabel = "";
+      return label;
     }
-    newStateVarLabel = "";
-    return label;
   }
 
   function removeState(state) {
