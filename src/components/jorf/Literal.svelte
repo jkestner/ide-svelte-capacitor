@@ -70,10 +70,11 @@
     onCreate={addStateVar}
     {createText}
     hideArrow
-    class="p-2 bg-slate-50 w-auto"
+    class="p-2 bg-slate-50 w-32"
   >
     <div slot="item" let:item let:label class="text-left">
-      {@html label}
+      {#if item.nodeName}<span style="font-weight:300">{item.nodeName}.</span
+        >{/if}{label}
       <!-- {#if item.description}
         <span class="align-right">{item.description}</span>
       {/if} -->
@@ -83,6 +84,13 @@
   <input
     type="text"
     bind:value
-    class="input outline-none outline-0 p-2 bg-slate-50 flex-auto rounded-none"
+    class="input outline-none outline-0 p-2 bg-slate-50 w-32 rounded-none"
   />
+  <span class="autocomplete-list" />
 {/if}
+
+<style>
+  .autocomplete-list.hidden {
+    width: 100px;
+  }
+</style>

@@ -31,29 +31,29 @@
   }
 </script>
 
-<div
-  class="md:flex w-full group hover:bg-primary hover:bg-opacity-10 {$$props.class}"
->
+<div class="flex group hover:bg-primary hover:bg-opacity-10 {$$props.class}">
   {#if draggable}
-    <div class="widgets">
+    <div class="widgets flex-none">
       <div class="opacity-0 group-hover:opacity-50">=</div>
     </div>
   {/if}
-  <div class="md:w-2/3 w-full" class:opacity-20={item.comment}>
-    {#if summarize || localSummarize}
-      {summary}
-    {:else}
-      <slot />
-    {/if}
+  <div class="flex flex-1 flex-wrap" class:opacity-20={item.comment}>
+    <div class="">
+      {#if summarize || localSummarize}
+        {summary}
+      {:else}
+        <slot />
+      {/if}
+    </div>
+    <div class="w-full md:w-1/3">
+      {#if summarize || localSummarize}
+        {item.notes || ""}
+      {:else}
+        <NotesTextarea bind:notes={item.notes} />
+      {/if}
+    </div>
   </div>
-  <div class="md:w-1/3 w-full">
-    {#if summarize || localSummarize}
-      {item.notes || ""}
-    {:else}
-      <NotesTextarea bind:notes={item.notes} />
-    {/if}
-  </div>
-  <div class="widgets">
+  <div class="widgets flex-none">
     <!-- <button
       class="btn opacity-50 group-hover:opacity-100 btn-xs"
       class:btn-ghost={!localSummarize}
@@ -61,7 +61,7 @@
     > -->
     <button
       class="btn opacity-50 group-hover:opacity-100 btn-xs"
-      class:btn-ghost={!item.commented}
+      class:btn-ghost={!item.comment}
       on:click={() => (item.comment = !item.comment)}>//</button
     >
     <RemoveButton {remove} />
@@ -69,8 +69,14 @@
 </div>
 
 <style>
+  .autocomplete {
+    max-width: 80% !important;
+  }
+  .input-container {
+    width: 100px !important;
+  }
   .widgets {
-    flex: 0 1 auto;
+    /* flex: 0 1 auto; */
     width: 2.75rem;
     align-items: center;
   }

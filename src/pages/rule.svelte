@@ -118,7 +118,7 @@
         <div class="widgets flex-none w-7">
           <button
             class="btn btn-ghost opacity-50 group-hover:opacity-100 btn-xs col-span-1"
-            class:btn-outline={summarize}
+            class:btn-ghost={!summarize}
             on:click={() => (summarize = !summarize)}>–</button
           >
           <RemoveButton remove={() => removeRule(rule)} />
