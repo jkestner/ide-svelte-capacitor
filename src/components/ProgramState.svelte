@@ -3,6 +3,7 @@
   import { JStateVar } from "../IDEObjects";
 
   import RuleLine from "@components/ide/RuleLine.svelte";
+  import Condition from "./jorf/Condition.svelte";
 
   let collapsed = false;
   let newStateVarLabel = "";
@@ -30,6 +31,25 @@
     $program.state_vars.splice($program.state_vars.indexOf(state), 1);
     $program = $program;
   }
+  function removeFunction(v) {
+    // if this variable is being used somewhere, don't return a remove function so the button is disabled
+    if (variableCount(v.label, $program.rules)) return undefined;
+    return () => removeState(v);
+  }
+
+  function variableCount(name, object) {
+    let varCount = 0;
+
+    for (var key in object) {
+      // consistency in naming objects in components is important so we can search only the fields that can contain variables
+      if ((key === "value" || key === "label") && object[key] === name) {
+        varCount++;
+      } else if (typeof object[key] === "object") {
+        varCount += variableCount(name, object[key]);
+      }
+    }
+    return varCount;
+  }
 </script>
 
 <section class="sectionrelative">
@@ -50,7 +70,7 @@
       <RuleLine
         item={v}
         collection={$program.state_vars}
-        remove={() => removeState(v)}
+        remove={removeFunction(v)}
       >
         <input
           value={v.label}
@@ -59,7 +79,7 @@
             $program = $program;
           }}
           class="input input-sm input-ghost placeholder-slate-50 placeholder-opacity-0 hover:placeholder-opacity-50"
-        />: {@html v.value || "<em>no value</em>"}
+        />: {v.value || "—"} ({variableCount(v.label, $program.rules)})
       </RuleLine>
     {/each}
     <div class="input-group">

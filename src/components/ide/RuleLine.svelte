@@ -64,7 +64,9 @@
       class:btn-ghost={!item.comment}
       on:click={() => (item.comment = !item.comment)}>//</button
     >
-    <RemoveButton {remove} />
+    {#if remove}
+      <RemoveButton {remove} />
+    {/if}
   </div>
 </div>
 
