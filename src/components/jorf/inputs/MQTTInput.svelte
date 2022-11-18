@@ -2,20 +2,13 @@
   import Literal from "@components/jorf/Literal.svelte";
   import Input from "./Input.svelte";
 
-  export let position = 1;
   export let value;
-
-  export const opMenu = [
-    { label: "is pressed" },
-    { label: "is released" },
-    { label: "is depressed" },
-    { label: "is down", labelDev: "0", value: 0 },
-    { label: "is up", labelDev: "1", value: 1 },
-    { label: "is double tapped" },
-  ];
+  export let from;
+  export let topic;
+  export let interval;
 
   export function summary() {
-    return "button " + position;
+    return "MQTT " + value + " from " + from;
   }
   function sample() {
     //TODO: make clear that sampling will just get the lefthand sensor's current value. disable if it's not a dynamic value.
@@ -25,5 +18,12 @@
 </script>
 
 <Input {sample}>
-  <Literal bind:value autocomplete vocabulary={opMenu} />
+  From
+  <Literal bind:from autocomplete />
+  Topic
+  <Literal bind:topic autocomplete />
+  Value
+  <Literal bind:value autocomplete />
+  Check how often?
+  <Literal bind:interval autocomplete />
 </Input>
