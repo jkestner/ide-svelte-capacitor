@@ -4,7 +4,7 @@
 
   import * as state from "@store/program.js";
   import { program, undoable, redoable } from "@store/program.js";
-  // import { nodes } from "@store/nodes";
+  import { nodes } from "@store/nodes";
 
   import Condition from "@components/jorf/Condition.svelte";
   import NodeList from "@components/NodeList.svelte";
@@ -68,6 +68,27 @@
   async function removeRule(rule) {
     localProgram.rules.splice(localProgram.rules.indexOf(rule), 1);
     $program = localProgram;
+  }
+
+  // TODO: This is running constantly because the node sensor values are changing. should only change when the rules change.
+  $: localnodes = () => {
+    let localNodeIds = allChildrenNamed("nodeName", $program); //once we have stable ids, use "node"
+
+    return $nodes.filter((n) => {
+      if (localNodeIds.indexOf(n.label) > -1) return n; //once we have stable ids, use n.id
+    });
+  };
+  function allChildrenNamed(name, object) {
+    let allNamedKids = [];
+
+    for (var key in object) {
+      if (key === name) {
+        allNamedKids.push(object[key]);
+      } else if (typeof object[key] === "object") {
+        allNamedKids.push(...allChildrenNamed(name, object[key]));
+      }
+    }
+    return allNamedKids;
   }
 </script>
 
@@ -150,7 +171,7 @@
   <div class="w-1/2"><ProgramState /></div>
   <div class="w-1/2">
     <h3 class="heading">Uses nodes</h3>
-    <NodeList />
+    <NodeList nodes={localnodes()} />
   </div>
 </div>
 

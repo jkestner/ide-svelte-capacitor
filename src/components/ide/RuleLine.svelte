@@ -53,7 +53,7 @@
       {/if}
     </div>
   </div>
-  <div class="widgets flex-none">
+  <div class="widgets flex-none opacity-0 group-hover:opacity-50">
     <!-- <button
       class="btn opacity-50 group-hover:opacity-100 btn-xs"
       class:btn-ghost={!localSummarize}

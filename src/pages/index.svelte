@@ -4,11 +4,6 @@
   //   import App from "src/App.svelte";
   import Index from "./index.svelte";
 
-  let nodes = [
-    { id: "1", name: "Garden", temperature: 72, humidity: 40, light: 4000 },
-    { id: "2", name: "NW", temperature: 78, humidity: 41, light: 3800 },
-    { id: "3", name: "Coop", temperature: 83, humidity: 55, light: 500 },
-  ];
   let rules = [
     {
       id: "1",
@@ -41,7 +36,7 @@
   </div>
 
   <h3 class="text-xl">Nodes</h3>
-  <NodeList {nodes} />
+  <NodeList />
 
   <h3 class="text-xl">Rules</h3>
   <RuleList {rules} />
