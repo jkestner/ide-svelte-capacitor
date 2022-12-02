@@ -1,18 +1,18 @@
 <!-- wrapper for all output components -->
 <script>
   import Popdown from "@components/transitions/Popdown.svelte";
-  import FaCompressArrowsAlt from "svelte-icons/fa/FaCompressArrowsAlt.svelte";
+  import FaCogs from "svelte-icons/fa/FaCogs.svelte";
 
   export let test = undefined; //test function
   export let parameters = {};
 </script>
 
 <Popdown>
-  <div class="input-group">
+  <div class="flex flex-wrap lg:flex-nowrap">
     <slot />
     {#if test}
-      <button class="btn btn-ghost w-14" on:click={test}
-        ><FaCompressArrowsAlt /></button
+      <button class="btn btn-ghost w-14" alt="test" on:click={test}
+        ><FaCogs /></button
       >
     {/if}
   </div>

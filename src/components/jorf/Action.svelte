@@ -41,6 +41,7 @@
 >
   {#each action.commands as command (command.id)}
     <div class="relative step" animate:flip={{ duration: flipDurationMs }}>
+      <!-- workaround so that elements that have a svelte component (with bindings?) don't disappear when drag/dropping-->
       {#if command.isDndShadowItem}
         <div>{command.command}</div>
       {:else}
@@ -74,12 +75,35 @@
 
 <style>
   .steps {
-    overflow: visible;
+  }
+  .steps-vertical {
+    grid-auto-rows: min-content;
+  }
+  .steps-vertical .step:before {
+    width: 0.25rem;
+    --tw-translate-y: 0rem;
+    /* background-color: blue; */
+  }
+  .steps-vertical .step:first-child:before {
+    /* height: calc(100% + 3rem); */
+    --tw-translate-y: 2rem;
+    /* background-color: red; */
+    content: "";
+  }
+  .steps-vertical .step:last-child:before {
+    --tw-translate-y: -2rem;
+  }
+  .steps .step:after {
+    place-self: start center;
+    margin-top: 1.25em;
   }
   .step-button {
     pointer-events: none;
   }
-  .step-button::after {
+  .step-button:after {
     pointer-events: all;
+  }
+  .step:before {
+    align-items: initial;
   }
 </style>

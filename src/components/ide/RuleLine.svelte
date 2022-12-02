@@ -31,21 +31,23 @@
   }
 </script>
 
-<div class="flex group hover:bg-primary hover:bg-opacity-10 {$$props.class}">
+<div
+  class="flex w-full group hover:bg-primary hover:bg-opacity-10 p-1 {$$props.class}"
+>
   {#if draggable}
     <div class="widgets flex-none">
       <div class="opacity-0 group-hover:opacity-50">=</div>
     </div>
   {/if}
-  <div class="flex flex-1 flex-wrap" class:opacity-20={item.comment}>
-    <div class="">
+  <div class="flex flex-auto flex-wrap" class:opacity-20={item.comment}>
+    <div class="basis-2/3">
       {#if summarize || localSummarize}
         {summary}
       {:else}
         <slot />
       {/if}
     </div>
-    <div class="w-full md:w-1/3">
+    <div class="basis-full lg:basis-1/3 shrink">
       {#if summarize || localSummarize}
         {item.notes || ""}
       {:else}
