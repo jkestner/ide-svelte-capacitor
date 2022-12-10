@@ -12,7 +12,7 @@
 </script>
 
 <Output {test}>
-  <label class="input-group">
+  <label class="input-group ml-2 mb-2">
     <span>Account</span>
     <input
       type="text"
@@ -21,7 +21,7 @@
       bind:value={params.account}
     />
   </label>
-  <label class="input-group ml-2">
+  <label class="input-group ml-2 mb-2">
     <label class="input-group">
       <span>Tweet</span>
       <textarea

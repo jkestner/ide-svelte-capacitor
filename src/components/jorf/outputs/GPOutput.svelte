@@ -13,7 +13,7 @@
 </script>
 
 <Output>
-  <label class="input-group">
+  <label class="input-group ml-2 mb-2">
     <span>Address</span>
     <input
       type="number"
@@ -23,7 +23,7 @@
       on:blur={test}
     />
   </label>
-  <label class="input-group ml-2">
+  <label class="input-group ml-2 mb-2">
     <span>Value</span>
     <input
       type="number"

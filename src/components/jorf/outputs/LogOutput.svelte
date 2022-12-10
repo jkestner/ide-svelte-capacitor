@@ -12,7 +12,7 @@
 </script>
 
 <Output {test}>
-  <label class="input-group">
+  <label class="input-group ml-2 mb-2">
     <span>Where</span>
     <input
       type="text"
@@ -21,7 +21,7 @@
     />
     <!-- dashboard, or a csv file (where?) or google spreadsheet or -->
   </label>
-  <label class="input-group ml-2">
+  <label class="input-group ml-2 mb-2">
     <span>Body</span>
     <textarea
       type="text"

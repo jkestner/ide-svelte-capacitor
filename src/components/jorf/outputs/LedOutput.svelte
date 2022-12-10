@@ -13,7 +13,7 @@
 </script>
 
 <Output {test}>
-  <label class="input-group">
+  <label class="input-group ml-2 mb-2">
     <span>Position</span>
     <input
       type="number"
@@ -22,7 +22,7 @@
       on:blur={test}
     />
   </label>
-  <label class="input-group ml-2">
+  <label class="input-group ml-2 mb-2">
     <span>Color</span>
     <input
       type="color"

@@ -13,14 +13,14 @@
 </script>
 
 <Output {test}>
-  <label class="input-group">
+  <label class="input-group ml-2 mb-2">
     <span>Method</span>
     <select type="text" class="select" bind:value={params.method}>
       <option>POST</option>
       <option>GET</option>
     </select>
   </label>
-  <label class="input-group ml-2">
+  <label class="input-group ml-2 mb-2">
     <span>URL</span>
     <input
       type="text"

@@ -13,7 +13,7 @@
 </script>
 
 <Output {test}>
-  <label class="input-group">
+  <label class="input-group ml-2 mb-2">
     <span>To</span>
     <input
       type="text"
@@ -22,7 +22,7 @@
       bind:value={params.to}
     />
   </label>
-  <label class="input-group ml-2">
+  <label class="input-group ml-2 mb-2">
     <span>topic</span>
     <input
       type="text"
@@ -31,7 +31,7 @@
       bind:value={params.topic}
     />
   </label>
-  <label class="input-group ml-2">
+  <label class="input-group ml-2 mb-2">
     <span>Content</span>
     <input
       type="text"
