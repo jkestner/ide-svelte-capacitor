@@ -34,7 +34,14 @@
 </script>
 
 <section
-  use:dndzone={{ items: action.commands, flipDurationMs, dragDisabled }}
+  use:dndzone={{
+    items: action.commands,
+    flipDurationMs,
+    dragDisabled,
+    type: "command",
+    dropTargetStyle: { outline: "none" },
+    dropTargetClasses: ["bg-primary", "opacity-10"],
+  }}
   on:consider={handleSort}
   on:finalize={handleSort}
   class="steps steps-vertical"
@@ -51,8 +58,9 @@
           remove={() => removeCommand(command)}
           {summarize}
           summary={command.command}
+          key={command.id}
         >
-          <Command {command} {action} isRoot />
+          <Command {command} isRoot />
         </RuleLine>
       {/if}
     </div>

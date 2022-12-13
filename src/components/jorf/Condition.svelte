@@ -50,7 +50,14 @@
 </script>
 
 <section
-  use:dndzone={{ items: condition.expressions, flipDurationMs, dragDisabled }}
+  use:dndzone={{
+    items: condition.expressions,
+    flipDurationMs,
+    dragDisabled,
+    type: "expression",
+    dropTargetStyle: { outline: "none" },
+    dropTargetClasses: ["bg-primary", "opacity-10"],
+  }}
   on:consider={handleSort}
   on:finalize={handleSort}
   class="steps steps-vertical"
@@ -75,8 +82,9 @@
           remove={() => removeExpression(expression)}
           {summarize}
           summary={summary(expression)}
+          key={expression.id}
         >
-          <Expression {expression} {condition} isRoot />
+          <Expression {expression} isRoot />
         </RuleLine>
       {/if}
     </div>

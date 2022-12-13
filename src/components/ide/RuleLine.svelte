@@ -14,6 +14,7 @@
   export let draggable = false;
   export let summarize = false;
   export let summary = "-";
+  export let key = item.id;
 
   let localSummarize = false;
 
