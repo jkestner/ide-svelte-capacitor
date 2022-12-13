@@ -89,7 +89,7 @@
   }
 </script>
 
-<div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
+<div class="flex flex-auto flex-wrap p-1 mb-2 {isRoot ? '' : 'ml-3'}">
   {#if expression.left.expr}
     <svelte:self expression={expression.left.expr} /><br />
     <OpPicker bind:expression bool />

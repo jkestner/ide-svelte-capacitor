@@ -110,7 +110,7 @@
   }
 </script>
 
-<div class="flex p-1 mb-2 {isRoot ? '' : 'ml-3'}">
+<div class="flex flex-auto flex-wrap p-1 mb-2 {isRoot ? '' : 'ml-3'}">
   <Literal
     autocomplete
     vocabulary={[...nodeOutputs, ...networkOutputs]}

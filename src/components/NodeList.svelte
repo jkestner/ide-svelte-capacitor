@@ -5,18 +5,20 @@
   export let nodes = $storeNodes; // if you want a custom array of nodes
 </script>
 
-<ul class="menu mt-6 ">
+<ul class="menu mt-6">
   {#each nodes as node}
-    <li>
-      <a href="/node?id={node.id}" class="columns-3 w-auto">
-        <div class="w-16 object-contain">
-          <img src="wedge.svg" />
+    <li class="flex flex-auto flex-wrap">
+      <a href="/node?id={node.id}" class="columns-3 ">
+        <div>
+          <div class="w-16 object-contain">
+            <img src="wedge.svg" />
+          </div>
+          <h2 class="w-40 card-title">
+            {node.label}
+          </h2>
         </div>
-        <h2 class="w-40 card-title">
-          {node.label}
-        </h2>
         <div
-          class="stats stats-horizontal w-full bg-primary text-primary-content rounded-xl"
+          class="stats stats-vertical sm:stats-horizontal bg-primary text-primary-content rounded-xl"
         >
           <div class="stat">
             <div class="stat-value text-base">

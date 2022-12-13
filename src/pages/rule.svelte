@@ -92,17 +92,19 @@
   }
 </script>
 
-<div class="flex flex-row justify-between items-center">
-  <input
-    class="input text-3xl font-bold m-1"
-    value={$program.name}
-    placeholder="program"
-    on:change={(me) => {
-      $program.name = me.target.value;
-      $program = $program;
-    }}
-  />
-  <div class="flex items-center gap-2">
+<div class="flex justify-between">
+  <div class="flex-initial">
+    <input
+      class="input text-3xl font-bold w-full m-1"
+      value={$program.name}
+      placeholder="program"
+      on:change={(me) => {
+        $program.name = me.target.value;
+        $program = $program;
+      }}
+    />
+  </div>
+  <div class="flex-none items-center gap-2">
     <button
       class="btn btn-sm btn-circle p-1"
       disabled={!$undoable}
@@ -167,9 +169,9 @@
 
 <div class="divider" />
 
-<div class="flex">
-  <div class="w-1/2"><ProgramState /></div>
-  <div class="w-1/2">
+<div class="flex flex-auto flex-wrap">
+  <ProgramState />
+  <div>
     <h3 class="heading">Uses nodes</h3>
     <NodeList nodes={localnodes()} />
   </div>
