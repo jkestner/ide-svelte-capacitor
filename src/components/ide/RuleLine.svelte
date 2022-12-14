@@ -2,33 +2,36 @@
   import * as state from "@store/program.js";
   import RemoveButton from "./RemoveButton.svelte";
   import NotesTextarea from "./NotesTextarea.svelte";
-  import { dndzone } from "svelte-dnd-action";
   import { flip } from "svelte/animate";
 
   let className = "";
   export { className as class };
 
   export let item;
-  export let collection;
   export let remove;
   export let draggable = false;
+  export let dragDisabled = true;
   export let summarize = false;
   export let summary = "-";
   export let key = item.id;
 
   let localSummarize = false;
 
-  function handleSort(e) {
-    collection = e.detail.items;
-  }
-  const flipDurationMs = 300;
 
-  async function removeAThing(item) {
-    //todo: make sure this is a unique item with a key
-    let b = collection.filter((obj) => obj != item);
-    collection = b;
-    console.log(collection);
-    await state.update();
+  // drag and drop
+
+  function startDrag(e) {
+    // preventing default to prevent lag on touch devices (because of the browser checking for screen scrolling)
+    e.preventDefault();
+    dragDisabled = false;
+  }
+  function handleKeyDown(e) {
+    if ((e.key === "Enter" || e.key === " ") && dragDisabled)
+      dragDisabled = false;
+  }
+
+  }
+
   }
 </script>
 
@@ -37,7 +40,15 @@
 >
   {#if draggable}
     <div class="widgets flex-none">
-      <div class="opacity-0 group-hover:opacity-50">=</div>
+      <div
+        class="opacity-0 group-hover:opacity-50"
+        style={"cursor: move"}
+        on:mousedown={startDrag}
+        on:touchstart={startDrag}
+        on:keydown={handleKeyDown}
+      >
+        =
+      </div>
     </div>
   {/if}
   <div class="flex flex-auto flex-wrap" class:opacity-20={item.comment}>
@@ -59,9 +70,9 @@
   <div class="widgets flex-none opacity-0 group-hover:opacity-50">
     <!-- <button
       class="btn opacity-50 group-hover:opacity-100 btn-xs"
-      class:btn-ghost={!localSummarize}
-      on:click={() => (localSummarize = !localSummarize)}>–</button
-    > -->
+    class:btn-ghost={!localSummarize}
+    on:click={() => (localSummarize = !localSummarize)}>–</button
+  > -->
     <button
       class="btn opacity-50 group-hover:opacity-100 btn-xs"
       class:btn-ghost={!item.comment}

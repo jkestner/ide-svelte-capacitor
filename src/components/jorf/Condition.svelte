@@ -4,16 +4,36 @@
   import * as state from "@store/program.js";
   import { program } from "@store/program.js";
   import Expression from "./Expression.svelte";
-  import { dndzone } from "svelte-dnd-action";
+  import { dndzone, SOURCES, TRIGGERS } from "svelte-dnd-action";
   import { flip } from "svelte/animate";
 
   export let condition;
   export let summarize;
 
   const flipDurationMs = 300;
-  let dragDisabled = false;
-  function handleSort(e) {
-    condition.expressions = e.detail.items;
+  let dragDisabled = true;
+
+  function handleConsider(e) {
+    const {
+      items: newItems,
+      info: { source, trigger },
+    } = e.detail;
+    condition.expressions = newItems;
+    // Ensure dragging is stopped on drag finish via keyboard
+    if (source === SOURCES.KEYBOARD && trigger === TRIGGERS.DRAG_STOPPED) {
+      dragDisabled = true;
+    }
+  }
+  function handleFinalize(e) {
+    const {
+      items: newItems,
+      info: { source },
+    } = e.detail;
+    condition.expressions = newItems;
+    // Ensure dragging is stopped on drag finish via pointer (mouse, touch)
+    if (source === SOURCES.POINTER) {
+      dragDisabled = true;
+    }
   }
 
   async function addExpression(condition) {
@@ -58,16 +78,12 @@
     dropTargetStyle: { outline: "none" },
     dropTargetClasses: ["bg-primary", "opacity-10"],
   }}
-  on:consider={handleSort}
-  on:finalize={handleSort}
+  on:consider={handleConsider}
+  on:finalize={handleFinalize}
   class="steps steps-vertical"
 >
   {#each condition.expressions as expression (expression.id)}
-    <div
-      class="relative step"
-      data-content=""
-      animate:flip={{ duration: flipDurationMs }}
-    >
+    <div class="relative step" animate:flip={{ duration: flipDurationMs }}>
       <!-- workaround so that elements that have a svelte component (with bindings?) don't disappear when drag/dropping-->
       {#if expression.isDndShadowItem}
         <div>
@@ -83,18 +99,21 @@
           {summarize}
           summary={summary(expression)}
           key={expression.id}
+          draggable
+          bind:dragDisabled
         >
           <Expression {expression} isRoot />
         </RuleLine>
       {/if}
     </div>
   {/each}
-  {#if !summarize}
-    <!-- This is a bit hacky to make a button step. This should go away when we replace DaisyUI and write our own steps UI.
+
+  <!-- //TODO: This is a bit hacky to make a button step. This should go away when we replace DaisyUI and write our own steps UI.
       Or should we not require a button, and just have another dropdown, adding item when picked?
 
     We disable drag on this item and add custom appearance. Events are now attached to ::after.
     -->
+  {#if !summarize}
     <div
       class="step step-neutral hover:step-primary cursor-pointer step-button"
       data-content="+"
