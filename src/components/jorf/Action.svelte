@@ -65,6 +65,7 @@
   on:consider={handleConsider}
   on:finalize={handleFinalize}
   class="steps steps-vertical"
+  style="overflow:visible"
 >
   {#each action.commands as command (command.id)}
     <div class="relative step" animate:flip={{ duration: flipDurationMs }}>

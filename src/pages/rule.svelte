@@ -125,7 +125,7 @@
 
 {#if $program.rules.length}
   {#each $program.rules as rule}
-    <div class="card mb-8 grid">
+    <div class="card mb-8 grid" style="overflow:visible">
       <div
         class="flex w-full peer group hover:bg-primary hover:bg-opacity-20 border-b-2"
       >

@@ -81,6 +81,7 @@
   on:consider={handleConsider}
   on:finalize={handleFinalize}
   class="steps steps-vertical"
+  style="overflow:visible"
 >
   {#each condition.expressions as expression (expression.id)}
     <div class="relative step" animate:flip={{ duration: flipDurationMs }}>
