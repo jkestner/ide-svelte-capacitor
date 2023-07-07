@@ -9,6 +9,9 @@
   export let autocomplete = false;
   export let vocabulary = [];
 
+  let myId = "literal_" + Math.floor(Math.random() * 999);
+  let myInput;
+
   $: items = [
     { label: "every", component: "IntervalInput" },
     { label: "time", component: "TimeInput" },
@@ -40,13 +43,14 @@
       userItems.push(sv);
       items.push(...userItems);
       items = items;
+      console.log(sv, items);
       return sv;
     }
   }
 
   onMount(async () => {
     myInput = document.getElementById(myId);
-    myInput.autocomplete = "off";
+    // myInput.autocomplete = "off";
 
     if (autocomplete) {
       items.push(...vocabulary);
@@ -61,6 +65,7 @@
 <!-- TODO: restore current value to text box on blur -->
 {#if autocomplete}
   <AutoComplete
+    inputId={myId}
     {items}
     value={() => this.selectedItem.value || this.selectedItem}
     bind:selectedItem={value}
@@ -68,6 +73,10 @@
     valueFieldName="value"
     create
     onCreate={addStateVar}
+    onFocus={() => {
+      // console.log(myInput);
+      myInput.select();
+    }}
     {createText}
     hideArrow
     class="p-2 bg-slate-50 w-32"

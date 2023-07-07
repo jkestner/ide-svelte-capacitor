@@ -1,6 +1,4 @@
 <script>
-  import { blank_object, loop_guard } from "svelte/internal";
-
   export let vocabulary;
   export let value = undefined;
   export let labelProperty = "label";
@@ -15,6 +13,13 @@
     let f = vocabulary.filter((v) => v.value == value);
     if (f.length) return f[0];
     else return vocabulary[0];
+  }
+  function fullLabel(a) {
+    let label = "";
+    if (a.nodeName) label = a.nodeName + ".";
+    label += a[labelProperty];
+
+    return label;
   }
 </script>
 
@@ -35,17 +40,7 @@
         </swiper-slide>
       </swiper> -->
   {:else if palette}
-    <div class="btn-group">
-      {#each vocabulary as a, i}
-        <input
-          class="btn"
-          type="radio"
-          bind:group={value}
-          data-title={a[labelProperty]}
-          value={a.value}
-        />
-      {/each}
-    </div>
+    palette component here
   {:else}
     <div class="chooser flex items-baseline">
       <select
@@ -55,9 +50,10 @@
         color="accent"
       >
         {#each vocabulary as a}
-          <option value={a.value} selected={selected().value == a.value}
-            >{a[labelProperty]}</option
-          >
+          <option value={a.value} selected={selected().value == a.value}>
+            {#if a.nodeName}{a.nodeName}.{/if}
+            {a[labelProperty]}
+          </option>
         {/each}
       </select>
       {#if selected().component}

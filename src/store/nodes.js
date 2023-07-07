@@ -1,5 +1,12 @@
 import { writable, readable, derived } from "svelte/store";
 
+import GpInput from "@components/jorf/inputs/GPInput.svelte";
+import TemperatureInput from "@components/jorf/inputs/TemperatureInput.svelte";
+import HumidityInput from "@components/jorf/inputs/HumidityInput.svelte";
+import ButtonInput from "@components/jorf/inputs/ButtonInput.svelte";
+import LightInput from "@components/jorf/inputs/LightInput.svelte";
+import BatteryInput from "@components/jorf/inputs/BatteryInput.svelte";
+
   //todo: these are dummies. replace nodes with simulated nodes.
 
   class Node {
@@ -12,12 +19,13 @@ import { writable, readable, derived } from "svelte/store";
         this.log = [];
         this.lastUpdated = new Date();
 
-        this.addSensor("temperature");       
-        this.addSensor("light");       
-        this.addSensor("humidity");       
-        this.addSensor("battery");     
-        this.addSensor("button");     
-        this.addSensor("pin");
+        this.addSensor("Temperature", "temperature", TemperatureInput);
+        this.addSensor("Light", "light", LightInput);       
+        this.addSensor("Humidity", "humidity", HumidityInput);       
+        this.addSensor("Battery", "battery", BatteryInput);     
+        this.addSensor("Button", "button", ButtonInput);     
+
+        console.log(this.sensors);
         
         this.addActuator("led");
         this.addActuator("pin");
@@ -33,11 +41,12 @@ import { writable, readable, derived } from "svelte/store";
       // setTimeout(this.simulate.bind(this), this.sensorPollingRate*1000);
     }
 
-    addSensor(label) {
+    addSensor(label, inputClass, component) {
       this.sensors.push({
         label: label,
         value: Math.floor(Math.random()*400+100)*10,
-        inputClass: "GPInput" //use this to dynamically load appropriate UI such as constraints for the possible values (i.e. slider with range)
+        inputClass: inputClass || label.toLowerCase(), //use this to dynamically load appropriate UI such as constraints for the possible values (i.e. slider with range)
+        component: component || GpInput
       })
     }
 

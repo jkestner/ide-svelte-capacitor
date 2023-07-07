@@ -14,6 +14,7 @@
   let touchable = "ontouchstart" in document.documentElement;
 
   export let item;
+  // export let collection;
   export let remove;
   export let draggable = false;
   export let dragDisabled = true;
@@ -23,6 +24,13 @@
 
   let localSummarize = false;
 
+  // async function removeAThing(item) {
+  //   //todo: make sure this is a unique item with a key
+  //   let b = collection.filter((obj) => obj != item);
+  //   collection = b;
+  //   console.log(collection);
+  //   await state.update();
+  // }
 
   // drag and drop
 

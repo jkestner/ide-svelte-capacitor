@@ -31,4 +31,8 @@
   else vocabulary = operations;
 </script>
 
-<PartPicker bind:vocabulary bind:value={expression.op.op} />
+<PartPicker
+  bind:vocabulary
+  bind:value={expression.op.op}
+  labelProperty="labelDev"
+/>

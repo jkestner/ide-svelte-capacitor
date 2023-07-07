@@ -3,6 +3,8 @@
   import { nodes } from "@store/nodes";
 
   import OpPicker from "@components/ide/OpPicker.svelte";
+  import PartPicker from "@components/ide/PartPicker.svelte";
+  import PartPalette from "@components/ide/PartPalette.svelte";
 
   import GPInput from "./inputs/GPInput.svelte";
   import TemperatureInput from "./inputs/TemperatureInput.svelte";
@@ -18,53 +20,54 @@
   const inputs = [
     {
       label: "Interval",
-      value: "interval",
+      inputClass: "interval",
       component: IntervalInput,
     },
     {
       label: "Time",
-      value: "time",
+      inputClass: "time",
       component: TimeInput,
     },
     {
       label: "Random number",
-      value: "random",
+      inputClass: "random",
       component: RandomInput,
     },
     {
       label: "Temperature",
-      value: "temperature",
+      inputClass: "temperature",
       component: TemperatureInput,
     },
     {
       label: "Humidity",
-      value: "humidity",
+      inputClass: "humidity",
       component: HumidityInput,
     },
     {
       label: "Light",
-      value: "light",
+      inputClass: "light",
       component: LightInput,
     },
     {
       label: "Button",
-      value: "button",
+      inputClass: "button",
       component: ButtonInput,
     },
     {
       label: "Pin",
-      value: "pin",
+      inputClass: "pin",
       component: GPInput,
     },
     {
       label: "Battery",
-      value: "battery",
+      inputClass: "battery",
       component: BatteryInput,
     },
   ];
 
   export let expression;
   export let isRoot = false;
+  import RangeSlider from "svelte-range-slider-pips";
 
   // Populating autocomplete menu with, basically, JLiteral objects
   //TODO: is this reactive? needs to be
@@ -73,17 +76,17 @@
     n.sensors.forEach((s) =>
       nodeInputs.push({
         label: s.label,
-        description: s.value,
-        value: s.label,
-        component: s.label,
+        description: s.label,
+        inputClass: s.inputClass,
         node: n.id,
         nodeName: n.label,
+        component: s.component,
       })
     );
   });
 
   function selectedComponent(componentName) {
-    let c = inputs.find((i) => i.value == componentName);
+    let c = inputs.find((i) => i.component == componentName);
     if (c) return c.component;
     else return null;
   }
@@ -94,11 +97,13 @@
     <svelte:self expression={expression.left.expr} /><br />
     <OpPicker bind:expression bool />
   {:else}
-    <Literal
+    <!-- <Literal
       bind:value={expression.left.value}
       autocomplete
       vocabulary={nodeInputs}
-    />
+    /> -->
+    <!-- <PartPicker bind:value={expression.left.value} vocabulary={nodeInputs} /> -->
+    <PartPalette bind:value={expression.left.value} vocabulary={nodeInputs} />
     <OpPicker bind:expression />
     <!-- if that Literal equals a known input type, replace the rest with the input component. -->
     {#if expression.left.value && expression.left.value.component && selectedComponent(expression.left.value.component)}

@@ -50,6 +50,25 @@
     }
     return varCount;
   }
+  function variablesUsed(object) {
+    let used = [];
+
+    $program.state_vars.forEach((sv) => {
+      // console.log("----", sv.label, "----");
+      // console.log(object);
+      object.forEach((key) => {
+        // consistency in naming objects in components is important so we can search only the fields that can contain variables'
+        // console.log(">>>>", key, object[key]);
+        if ((key === "value" || key === "label") && object[key] === sv.label) {
+          // console.log("+", sv.label);
+          used.push(sv.label);
+        } else if (typeof object[key] === "object") {
+          used.push(...variablesUsed(object[key]));
+        }
+      });
+      return used;
+    });
+  }
 </script>
 
 <section class="sectionrelative">
@@ -64,7 +83,7 @@
       on:click={() => (collapsed = !collapsed)}>–</button
     > -->
   </div>
-
+  {console.log(variablesUsed($program.rules))}
   {#if !collapsed}
     {#each $program.state_vars as v}
       <RuleLine
@@ -79,7 +98,11 @@
             $program = $program;
           }}
           class="input input-sm input-ghost placeholder-slate-50 placeholder-opacity-0 hover:placeholder-opacity-50"
-        />: {v.value || "—"} ({variableCount(v.label, $program.rules)})
+        />
+        : {v.value || "—"}
+        <span class="opacity-0 group-hover:opacity-50">
+          ({variableCount(v.label, $program.rules)} uses)
+        </span>
       </RuleLine>
     {/each}
     <div class="input-group">
