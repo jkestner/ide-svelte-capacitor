@@ -86,7 +86,7 @@
       <FaRegTrashAlt />
     </div>
     <div
-      class="flex w-full group hover:bg-gray-100 p-1 z-10 bg-white {$$props.class}"
+      class="flex w-full group hover:bg-base-200  p-1 z-10 bg-white {$$props.class}"
       {key}
       bind:offsetWidth={w}
       use:myslide
@@ -149,7 +149,7 @@
     </div>
   </div>
 {:else}
-  <div class="flex w-full group hover:bg-gray-100 p-1 {$$props.class}">
+  <div class="flex w-full group hover:bg-base-200 rounded p-1 {$$props.class}">
     {#if draggable}
       <div class="widgets flex-none">
         <div

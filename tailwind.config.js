@@ -5,7 +5,7 @@ module.exports = {
     extend: {},
   },
   daisyui: {
-    themes: [      {
+    themes: [ {
       pickup: {
         "primary": "#FF9E00",
         "secondary": "#00CBFF",
@@ -13,8 +13,16 @@ module.exports = {
         "neutral": "#222222",
         "base-100": "#FFF9F0", //"#FFFFFF"
       },
+      pickupDark: {
+        "primary": "#FF9E00",
+        "secondary": "#00CBFF",
+        "accent": "#FF3800",
+        "neutral": "#FFF9F0",
+        "base-100": "#222222", //"#FFFFFF"
+      },
     },
-"bumblebee", "retro"],
+    "bumblebee", "retro"],
+    darkTheme: "pickupDark",
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 }
