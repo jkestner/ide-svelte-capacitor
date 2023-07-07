@@ -5,39 +5,64 @@
   export let nodes = $storeNodes; // if you want a custom array of nodes
 </script>
 
-<ul class="menu mt-6">
+<ul class="mt-6">
   {#each nodes as node}
-    <li class="flex flex-auto flex-wrap">
-      <a href="/node?id={node.id}" class="columns-3 ">
-        <div>
-          <div class="w-16 object-contain">
-            <img src="wedge.svg" />
+    <h2>
+      <a href="/node?id={node.id}">{node.label}</a>
+    </h2>
+    <li class="grid grid-cols-3 p-2 gap-2">
+      {#if node.sensors[0]}
+        <div class="stat bg-{node.color} rounded-xl h-32 p-4 ">
+          <div class="stat-title left-0 -mt-2">
+            {node.sensors[0].label}
           </div>
-          <h2 class="w-40 card-title">
-            {node.label}
-          </h2>
+          <div class="stat-value">
+            {Math.round(node.sensors[0].value / 100).toFixed(1)}<span
+              class="stat-desc text-lg">ºF</span
+            >
+          </div>
         </div>
+      {/if}
+      {#if node.sensors[2]}
         <div
-          class="stats stats-vertical sm:stats-horizontal bg-primary text-primary-content rounded-xl"
+          class="stat relative bg-{node.color} bg-contain bg-center bg-no-repeat rounded-xl col-span-2 h-32 p-4 "
+          style="background-image: url(assets/line_graph.svg)"
         >
-          <div class="stat">
-            <div class="stat-value text-base">
-              {node.sensors[0].value / 100}ºF
-            </div>
+          <div class="stat-title absolute left-0 top-2">
+            {node.sensors[2].label}
           </div>
-
-          <div class="stat">
-            <div class="stat-value text-base">
-              {Math.floor(node.sensors[2].value / 100)}%
-            </div>
-          </div>
-          <div class="stat">
-            <div class="stat-value text-base">
-              {node.sensors[1].value} lux
-            </div>
+          <div class="stat-value absolute right-2 top-2">
+            {Math.floor(node.sensors[2].value / 100)}<span
+              class="stat-desc text-lg">dB</span
+            >
           </div>
         </div>
-      </a>
+      {/if}
+      {#if node.sensors[1]}
+        <div
+          class="stat relative bg-{node.color}  bg-contain bg-bottom bg-no-repeat rounded-xl col-span-3 h-32 p-4 "
+          style="background-image: url(assets/bar_graph.svg)"
+        >
+          <div class="stat-title absolute left-0 top-2">
+            {node.sensors[1].label}
+          </div>
+          <div class="stat-value absolute right-2 top-2">
+            {node.sensors[1].value}<span class="stat-desc text-lg">lux</span>
+          </div>
+        </div>
+      {/if}
+      {#if node.sensors[3]}
+        <div class="stat bg-{node.color} rounded-xl h-32 p-4 ">
+          <div class="stat-title left-0 -mt-2">
+            {node.sensors[3].label}
+          </div>
+          <div class="stat-value">
+            {Math.round(node.sensors[3].value / 100).toFixed(1)}<span
+              class="stat-desc text-lg">ºF</span
+            >
+          </div>
+        </div>
+      {/if}
     </li>
   {/each}
 </ul>

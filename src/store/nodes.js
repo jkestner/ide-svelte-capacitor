@@ -2,7 +2,7 @@ import { writable, readable, derived } from "svelte/store";
 
 import GpInput from "@components/jorf/inputs/GPInput.svelte";
 import TemperatureInput from "@components/jorf/inputs/TemperatureInput.svelte";
-import HumidityInput from "@components/jorf/inputs/HumidityInput.svelte";
+import SoundLevelInput from "@components/jorf/inputs/SoundLevelInput.svelte";
 import ButtonInput from "@components/jorf/inputs/ButtonInput.svelte";
 import LightInput from "@components/jorf/inputs/LightInput.svelte";
 import BatteryInput from "@components/jorf/inputs/BatteryInput.svelte";
@@ -10,9 +10,10 @@ import BatteryInput from "@components/jorf/inputs/BatteryInput.svelte";
   //todo: these are dummies. replace nodes with simulated nodes.
 
   class Node {
-    constructor(label) {
+    constructor(label, color="primary") {
         this.id = Math.floor(Math.random()*999);
         this.label = label;
+        this.color = color;
         this.sensorPollingRate = 1; // in seconds
         this.sensors = [];
         this.actuators = [];
@@ -21,7 +22,7 @@ import BatteryInput from "@components/jorf/inputs/BatteryInput.svelte";
 
         this.addSensor("Temperature", "temperature", TemperatureInput);
         this.addSensor("Light", "light", LightInput);       
-        this.addSensor("Humidity", "humidity", HumidityInput);       
+        this.addSensor("Sound level", "sound", SoundLevelInput);       
         this.addSensor("Battery", "battery", BatteryInput);     
         this.addSensor("Button", "button", ButtonInput);     
 
@@ -59,7 +60,7 @@ import BatteryInput from "@components/jorf/inputs/BatteryInput.svelte";
     }
 }
 
-export const nodes = writable([ new Node("Garden SW"), new Node("Garden NW"), new Node("Coop"), new Node("Tank")]);
+export const nodes = writable([ new Node("Garden SW"), new Node("Garden NW", "secondary"), new Node("Coop", "accent")]);
 
 setInterval(() => {
   nodes.update(current => {
