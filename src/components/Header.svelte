@@ -9,16 +9,15 @@
   }
 </script>
 
-<div class="navbar bg-base">
+<div class="navbar bg-base -mt-4">
   <div class="flex-1">
-    <div class="text-sm breadcrumbs">
-      <ul>
-        <li>
-          <a href={$url("/index")} class="font-bold">Jumprope</a>
-        </li>
-        <li><a href={$url("/node")}>Node</a></li>
-        <li><a href={$url("/rule")}>IDE</a></li>
-      </ul>
+    <div class="text-sm">
+      <a href={$url("/index")} class="font-bold">Jumprope</a>
+      <span class="sm:text-secondary">sm</span>
+      <span class="md:text-secondary">md</span>
+      <span class="lg:text-secondary">lg</span>
+      <span class="xl:text-secondary">xl</span>
+      <span class="2xl:text-secondary">2xl</span>
     </div>
   </div>
   <div class="flex-none">

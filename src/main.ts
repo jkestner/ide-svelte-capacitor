@@ -1,6 +1,6 @@
 import HMR from "@roxi/routify/hmr";
 import App from './App.svelte'
-// import '../assets/global.css'
+import '../assets/global.css'
 
 // const app = new App({
 //   target: document.getElementById('app')

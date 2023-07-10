@@ -31,12 +31,6 @@
 </script>
 
 <div class="m-2 container mx-auto text-sm">
-  {fullName}
-  <span class="sm:text-secondary">sm</span>
-  <span class="md:text-secondary">md</span>
-  <span class="lg:text-secondary">lg</span>
-  <span class="xl:text-secondary">xl</span>
-  <span class="2xl:text-secondary">2xl</span>
   <Header />
   <div class="m-2 container mx-auto">
     <slot decorator={Transition} {configs} />
