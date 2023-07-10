@@ -110,7 +110,7 @@
         bind:value={newStateVarLabel}
         on:keyup={(e) => e.key === "Enter" && addStateVar(newStateVarLabel)}
         placeholder="Add a variable"
-        class="input input-sm bg-slate-50 border-0 placeholder-slate-500 placeholder-opacity-50 hover:placeholder-opacity-50"
+        class="input input-sm bg-base-200 border-0 placeholder-slate-500 placeholder-opacity-50 hover:placeholder-opacity-50"
       />
       <button
         class="btn btn-sm"

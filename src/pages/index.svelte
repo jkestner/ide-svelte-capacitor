@@ -1,12 +1,12 @@
 <script>
   import { onMount } from "svelte";
-  import NodeList from "@components/NodeList.svelte";
-  import RuleList from "@components/RuleList.svelte";
   //   import App from "src/App.svelte";
   import Index from "./index.svelte";
 
   import { register } from "swiper/element/bundle";
   import Monitor from "@components/Monitor.svelte";
+  import Rule from "./rule.svelte";
+
   // register Swiper custom elements
   register();
 
@@ -41,9 +41,15 @@
     <swiper-slide class="swiper-slide-active" lazy="true"
       ><Monitor />
     </swiper-slide>
-    <swiper-slide lazy="true">Record</swiper-slide>
-    <swiper-slide lazy="true">Notify</swiper-slide>
-    <swiper-slide lazy="true">Automate</swiper-slide>
+    <swiper-slide lazy="true">
+      <img src="/record.png" />
+    </swiper-slide>
+    <swiper-slide lazy="true">
+      <img src="/automate.png" />
+    </swiper-slide>
+    <swiper-slide lazy="true">
+      <Rule />
+    </swiper-slide>
   </swiper-container>
 </div>
 

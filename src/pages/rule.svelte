@@ -7,6 +7,7 @@
   import { nodes } from "@store/nodes";
 
   import Condition from "@components/jorf/Condition.svelte";
+  import Action from "@components/jorf/Action.svelte";
   import NodeList from "@components/NodeList.svelte";
   import RemoveButton from "@components/ide/RemoveButton.svelte";
   import { params } from "@roxi/routify";
@@ -14,7 +15,6 @@
   import FaUndoAlt from "svelte-icons/fa/FaUndoAlt.svelte";
   import FaRedoAlt from "svelte-icons/fa/FaRedoAlt.svelte";
 
-  import Action from "@components/jorf/Action.svelte";
   import ProgramState from "@components/ProgramState.svelte";
 
   let localProgram;
@@ -92,7 +92,7 @@
   }
 </script>
 
-<div class="flex justify-between">
+<div class="flex justify-between hidden">
   <div class="flex-initial">
     <input
       class="input text-3xl font-bold w-full m-1"
@@ -112,9 +112,12 @@
     >
       <FaUndoAlt />
     </button>
-    <Time relative timestamp={program.updated} />
-    <!-- TODO: show actual time on hover-->
-    <!-- <em class="text-sm">{$program.updated}</em> -->
+    <Time
+      relative
+      live
+      format="MMMM DD, YYYY HH:MM"
+      timestamp={program.updated}
+    />
     <button
       class="btn btn-sm btn-circle p-1"
       disabled={!$redoable}

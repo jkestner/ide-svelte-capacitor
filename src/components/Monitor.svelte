@@ -26,7 +26,7 @@
       {#if node.sensors[2]}
         <div
           class="stat relative bg-{node.color} bg-contain bg-center bg-no-repeat rounded-xl col-span-2 h-32 p-4 "
-          style="background-image: url(assets/line_graph.svg)"
+          style="background-image: url(/line_graph.svg)"
         >
           <div class="stat-title absolute left-0 top-2 text-lg">
             {node.sensors[2].label}
@@ -41,7 +41,7 @@
       {#if node.sensors[1]}
         <div
           class="stat relative bg-{node.color}  bg-contain bg-bottom bg-no-repeat rounded-xl col-span-3 h-32 p-4 "
-          style="background-image: url(assets/bar_graph.svg)"
+          style="background-image: url(/bar_graph.svg)"
         >
           <div class="stat-title absolute left-0 top-2 text-lg">
             {node.sensors[1].label}
@@ -66,3 +66,5 @@
     </li>
   {/each}
 </ul>
+<!-- dummy to get these dynamically assigned classes included -->
+<div class="bg-primary bg-secondary bg-accent hidden" />
