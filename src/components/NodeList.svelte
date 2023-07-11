@@ -5,15 +5,15 @@
   export let nodes = $storeNodes; // if you want a custom array of nodes
 </script>
 
-<ul class="mt-6">
+<ul class="mt-6 text-primary-content">
   {#each nodes as node}
-    <h2>
+    <h2 class="text-base-content">
       <a href="/node?id={node.id}">{node.label}</a>
     </h2>
     <li class="grid grid-cols-3 p-2 gap-2">
       {#if node.sensors[0]}
         <div class="stat bg-{node.color} rounded-xl h-32 p-4 ">
-          <div class="stat-title left-0 -mt-2">
+          <div class="stat-title left-0 -mt-2 text-lg">
             {node.sensors[0].label}
           </div>
           <div class="stat-value">
@@ -28,7 +28,7 @@
           class="stat relative bg-{node.color} bg-contain bg-center bg-no-repeat rounded-xl col-span-2 h-32 p-4 "
           style="background-image: url(assets/line_graph.svg)"
         >
-          <div class="stat-title absolute left-0 top-2">
+          <div class="stat-title absolute left-0 top-2 text-lg">
             {node.sensors[2].label}
           </div>
           <div class="stat-value absolute right-2 top-2">
@@ -43,7 +43,7 @@
           class="stat relative bg-{node.color}  bg-contain bg-bottom bg-no-repeat rounded-xl col-span-3 h-32 p-4 "
           style="background-image: url(assets/bar_graph.svg)"
         >
-          <div class="stat-title absolute left-0 top-2">
+          <div class="stat-title absolute left-0 top-2 text-lg">
             {node.sensors[1].label}
           </div>
           <div class="stat-value absolute right-2 top-2">
@@ -51,13 +51,13 @@
           </div>
         </div>
       {/if}
-      {#if node.sensors[3]}
-        <div class="stat bg-{node.color} rounded-xl h-32 p-4 ">
-          <div class="stat-title left-0 -mt-2">
-            {node.sensors[3].label}
+      {#if node.sensors[5]}
+        <div class="stat bg-{node.color} rounded-xl h-32 p-4">
+          <div class="stat-title left-0 -mt-2 text-lg">
+            {node.sensors[5].label}
           </div>
           <div class="stat-value">
-            {Math.round(node.sensors[3].value / 100).toFixed(1)}<span
+            {Math.round(node.sensors[5].value / 100).toFixed(1)}<span
               class="stat-desc text-lg">ºF</span
             >
           </div>

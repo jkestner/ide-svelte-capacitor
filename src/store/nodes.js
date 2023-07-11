@@ -6,6 +6,7 @@ import SoundLevelInput from "@components/jorf/inputs/SoundLevelInput.svelte";
 import ButtonInput from "@components/jorf/inputs/ButtonInput.svelte";
 import LightInput from "@components/jorf/inputs/LightInput.svelte";
 import BatteryInput from "@components/jorf/inputs/BatteryInput.svelte";
+import HumidityInput from "@components/jorf/inputs/HumidityInput.svelte";
 
   //todo: these are dummies. replace nodes with simulated nodes.
 

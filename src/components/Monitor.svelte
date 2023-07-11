@@ -2,13 +2,22 @@
   import { program } from "@store/program.js";
   import { nodes as storeNodes } from "@store/nodes";
 
+  import HumidityInput from "./jorf/inputs/HumidityInput.svelte";
+
   export let nodes = $storeNodes; // if you want a custom array of nodes
 </script>
 
 <ul class="mt-6 text-primary-content">
   {#each nodes as node}
     <h2 class="text-base-content">
-      <a href="/node?id={node.id}">{node.label}</a>
+      <!-- <a href="/node?id={node.id}">{node.label}</a> -->
+      <a
+        href=""
+        on:click={() => {
+          node.addSensor("Humdity", "humidity", HumidityInput);
+          node.simulate();
+        }}>{node.label}</a
+      >
     </h2>
     <li class="grid grid-cols-3 p-2 gap-2">
       {#if node.sensors[0]}
