@@ -1,21 +1,49 @@
 <script>
   import { program } from "@store/program.js";
-  import { nodes as storeNodes } from "@store/nodes";
+  import { Node, nodes as storeNodes } from "@store/nodes";
 
   import HumidityInput from "./jorf/inputs/HumidityInput.svelte";
+  import { fade } from "svelte/transition";
 
   export let nodes = $storeNodes; // if you want a custom array of nodes
+
+  setInterval(() => {
+    $storeNodes.forEach((node) => {
+      node.sensors.forEach((s) => {
+        s.value += Math.floor((Math.random() - 0.5) * 100);
+        console.log(s.value);
+      });
+      node.lastUpdated = new Date();
+      node = node;
+    });
+  }, 5000);
+  $storeNodes = $storeNodes;
+  //   nodes.update(current => {
+  //     current.forEach((node) => {
+  //       //TODO: simulate dropout.
+  //       // if (Math.random() < .5) return;
+
+  //       node.simulate();
+  //     });
+  //     return current;
+  //   });
+  // }, 500);
 </script>
 
 <ul class="mt-6 text-primary-content">
   {#each nodes as node}
     <h2 class="text-base-content">
+      <a
+        href=""
+        on:click={() => {
+          $storeNodes.push(new Node("test", "secondary"));
+        }}>add</a
+      >
       <!-- <a href="/node?id={node.id}">{node.label}</a> -->
       <a
         href=""
         on:click={() => {
           node.addSensor("Humdity", "humidity", HumidityInput);
-          node.simulate();
         }}>{node.label}</a
       >
     </h2>
@@ -61,7 +89,7 @@
         </div>
       {/if}
       {#if node.sensors[5]}
-        <div class="stat bg-{node.color} rounded-xl h-32 p-4">
+        <div transition:fade class="stat bg-{node.color} rounded-xl h-32 p-4">
           <div class="stat-title left-0 -mt-2 text-lg">
             {node.sensors[5].label}
           </div>

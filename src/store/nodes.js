@@ -10,7 +10,7 @@ import HumidityInput from "@components/jorf/inputs/HumidityInput.svelte";
 
   //todo: these are dummies. replace nodes with simulated nodes.
 
-  class Node {
+export class Node {
     constructor(label, color="primary") {
         this.id = Math.floor(Math.random()*999);
         this.label = label;
@@ -26,8 +26,6 @@ import HumidityInput from "@components/jorf/inputs/HumidityInput.svelte";
         this.addSensor("Sound level", "sound", SoundLevelInput);       
         this.addSensor("Battery", "battery", BatteryInput);     
         this.addSensor("Button", "button", ButtonInput);     
-
-        console.log(this.sensors);
         
         this.addActuator("led");
         this.addActuator("pin");
@@ -70,6 +68,7 @@ setInterval(() => {
       // if (Math.random() < .5) return;
 
       node.simulate();
+      node = node;
     });
     return current;
   });
