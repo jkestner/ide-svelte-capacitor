@@ -8,6 +8,7 @@
   export let value;
   export let autocomplete = false;
   export let vocabulary = [];
+  export let numerical = false;
 
   let myId = "literal_" + Math.floor(Math.random() * 999);
   let myInput;
@@ -79,7 +80,7 @@
     }}
     {createText}
     hideArrow
-    class="p-2 bg-slate-50 w-32"
+    class="p-2 bg-primary text-primary-content w-32"
   >
     <div slot="item" let:item let:label class="text-left">
       {#if item.nodeName}<span style="font-weight:300">{item.nodeName}.</span
@@ -93,7 +94,9 @@
   <input
     type="text"
     bind:value
-    class="input outline-none outline-0 p-2 bg-slate-50 w-32 rounded-none"
+    class="input border-primary {numerical
+      ? 'w-16 rounded-l-none'
+      : 'w-32 rounded-none'}"
   />
   <span class="autocomplete-list" />
 {/if}

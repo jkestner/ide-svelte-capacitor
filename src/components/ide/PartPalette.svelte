@@ -12,13 +12,11 @@
   // $: value &&
 
   function selected() {
-    console.log(vocabulary);
     let f = vocabulary.filter((v) => {
       let r = v.inputClass == value.inputClass;
       // if (v.nodeName && a && a.nodeName) r = r && v.nodeName == a.nodeName;
       return r;
     });
-    console.log(f[0]);
 
     if (f.length) return f[0];
     else return vocabulary[0];
@@ -101,7 +99,7 @@
   {:else}
     <div class="chooser flex items-baseline">
       <select
-        class="select select-ghost rounded-none overflow-visible"
+        class="select bg-primary overflow-visible normal-case mr-1"
         bind
         placeholder="command"
         color="accent"

@@ -40,7 +40,7 @@
     condition.expressions.push({
       id: Math.floor(Math.random() * 999),
       left: {
-        value: "temp",
+        value: "temperature",
       },
       op: {
         op: ">",
@@ -116,7 +116,7 @@
     -->
   {#if !summarize}
     <div
-      class="step step-neutral hover:step-primary cursor-pointer step-button"
+      class="cursor-pointer step step-neutral hover:step-primary cursor-pointer step-button"
       data-content="+"
       on:mouseenter={(event) => (dragDisabled = true)}
       on:mouseleave={(event) => (dragDisabled = false)}

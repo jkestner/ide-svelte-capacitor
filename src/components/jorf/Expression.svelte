@@ -117,7 +117,8 @@
       (right expression)
       <!-- <svelte:self expression={expression.right.expr} /> -->
     {:else}
-      <Literal bind:value={expression.right.value} />
+      <Literal bind:value={expression.right.value} numerical />
+      <!--TODO put unit here if known -->
     {/if}
   {/if}
 </div>

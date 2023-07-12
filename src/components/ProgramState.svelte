@@ -83,7 +83,6 @@
       on:click={() => (collapsed = !collapsed)}>–</button
     > -->
   </div>
-  {console.log(variablesUsed($program.rules))}
   {#if !collapsed}
     {#each $program.state_vars as v}
       <RuleLine

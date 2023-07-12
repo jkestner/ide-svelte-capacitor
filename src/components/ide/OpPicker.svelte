@@ -34,5 +34,6 @@
 <PartPicker
   bind:vocabulary
   bind:value={expression.op.op}
+  class="btn btn-primary rounded-r-none px-0"
   labelProperty="labelDev"
 />
