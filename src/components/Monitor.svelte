@@ -2,7 +2,7 @@
   import { program } from "@store/program.js";
   import { Node, nodes as storeNodes } from "@store/nodes";
 
-  import HumidityInput from "./jorf/inputs/HumidityInput.svelte";
+  import Co2Input from "./jorf/inputs/Co2Input.svelte";
   import { fade } from "svelte/transition";
 
   $: nodes = $storeNodes; // if you want a custom array of nodes
@@ -24,48 +24,52 @@
       <a
         href=""
         on:click={() => {
-          node.addSensor("Humdity", "humidity", HumidityInput);
+          node.addSensor("CO2", "ppm", "co2", Co2Input);
         }}>{node.label}</a
       >
     </h2>
     <li class="grid grid-cols-3 p-2 gap-2">
       {#if node.sensors[0]}
-        <div class="stat bg-{node.color} rounded-xl h-32 p-4 ">
-          <div class="stat-title left-0 -mt-2 text-lg">
+        <div
+          transition:fade
+          class="stat relative bg-{node.color} bg-contain bg-center bg-no-repeat rounded-xl col-span-2 h-32 p-4 "
+          style="background-image: url(/line_graph.svg)"
+        >
+          <div class="stat-title absolute left-0 top-2 text-lg">
             {node.sensors[0].label}
           </div>
-          <div class="stat-value">
-            {Math.round(node.sensors[0].value / 100).toFixed(1)}<span
-              class="stat-desc text-lg">ºF</span
+          <div class="stat-value absolute right-2 top-2">
+            {Math.floor(node.sensors[0].value / 100)}<span
+              class="stat-desc text-lg">{node.sensors[0].unit}</span
             >
           </div>
         </div>
       {/if}
       {#if node.sensors[2]}
-        <div
-          class="stat relative bg-{node.color} bg-contain bg-center bg-no-repeat rounded-xl col-span-2 h-32 p-4 "
-          style="background-image: url(/line_graph.svg)"
-        >
-          <div class="stat-title absolute left-0 top-2 text-lg">
+        <div transition:fade class="stat bg-{node.color} rounded-xl h-32 p-4 ">
+          <div class="stat-title left-0 -mt-2 text-lg">
             {node.sensors[2].label}
           </div>
-          <div class="stat-value absolute right-2 top-2">
-            {Math.floor(node.sensors[2].value / 100)}<span
-              class="stat-desc text-lg">dB</span
+          <div class="stat-value">
+            {Math.round(node.sensors[2].value / 100).toFixed(1)}<span
+              class="stat-desc text-lg">{node.sensors[2].unit}</span
             >
           </div>
         </div>
       {/if}
       {#if node.sensors[1]}
         <div
-          class="stat relative bg-{node.color}  bg-contain bg-bottom bg-no-repeat rounded-xl col-span-3 h-32 p-4 "
+          transition:fade
+          class="stat relative bg-{node.color} bg-contain bg-bottom bg-no-repeat rounded-xl col-span-3 h-32 p-4 "
           style="background-image: url(/bar_graph.svg)"
         >
           <div class="stat-title absolute left-0 top-2 text-lg">
             {node.sensors[1].label}
           </div>
           <div class="stat-value absolute right-2 top-2">
-            {node.sensors[1].value}<span class="stat-desc text-lg">lux</span>
+            {node.sensors[1].value}<span class="stat-desc text-lg"
+              >{node.sensors[1].unit}</span
+            >
           </div>
         </div>
       {/if}
@@ -75,8 +79,8 @@
             {node.sensors[5].label}
           </div>
           <div class="stat-value">
-            {Math.round(node.sensors[5].value / 100).toFixed(1)}<span
-              class="stat-desc text-lg">ºF</span
+            {Math.round(node.sensors[5].value / 100).toFixed(0)}<span
+              class="stat-desc text-lg">{node.sensors[5].unit}</span
             >
           </div>
         </div>

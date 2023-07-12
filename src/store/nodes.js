@@ -7,6 +7,7 @@ import ButtonInput from "@components/jorf/inputs/ButtonInput.svelte";
 import LightInput from "@components/jorf/inputs/LightInput.svelte";
 import BatteryInput from "@components/jorf/inputs/BatteryInput.svelte";
 import HumidityInput from "@components/jorf/inputs/HumidityInput.svelte";
+import Co2Input from "@components/jorf/inputs/Co2Input.svelte";
 
   //todo: these are dummies. replace nodes with simulated nodes.
 
@@ -21,12 +22,18 @@ export class Node {
         this.log = [];
         this.lastUpdated = new Date();
 
-        this.addSensor("Temperature", "temperature", TemperatureInput);
-        this.addSensor("Light", "light", LightInput);       
-        this.addSensor("Sound level", "sound", SoundLevelInput);       
-        this.addSensor("Battery", "battery", BatteryInput);     
-        this.addSensor("Button", "button", ButtonInput);     
-        
+        if (label === "Coop") {
+          this.addSensor("Temperature", "ºF", "temperature", TemperatureInput);
+          this.addSensor("Light", "lux", "light", LightInput);
+          this.addSensor("Sound level", "dB", "sound", SoundLevelInput);       
+        }
+else {
+        this.addSensor("Temperature", "ºF", "temperature", TemperatureInput);
+        this.addSensor("Light", "lux", "light", LightInput);       
+        this.addSensor("Sound level", "dB", "sound", SoundLevelInput);       
+        this.addSensor("Battery", "V", "battery", BatteryInput);     
+        this.addSensor("Button", "", "button", ButtonInput);     
+      }
         this.addActuator("led");
         this.addActuator("pin");
         if (Math.random() < .5)
@@ -35,16 +42,17 @@ export class Node {
 
     simulate() {
       this.sensors.forEach(s => {
-        s.value += Math.floor((Math.random() -.5) * 10);
+       s.value += Math.floor((Math.random() -.5) * 100);
       })
       this.lastUpdated = new Date();
       // setTimeout(this.simulate.bind(this), this.sensorPollingRate*1000);
     }
 
-    addSensor(label, inputClass, component) {
+    addSensor(label, unit, inputClass, component) {
       this.sensors.push({
         label: label,
         value: Math.floor(Math.random()*400+100)*10,
+        unit: unit,
         inputClass: inputClass || label.toLowerCase(), //use this to dynamically load appropriate UI such as constraints for the possible values (i.e. slider with range)
         component: component || GpInput
       })
