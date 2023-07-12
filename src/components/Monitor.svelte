@@ -5,29 +5,10 @@
   import HumidityInput from "./jorf/inputs/HumidityInput.svelte";
   import { fade } from "svelte/transition";
 
-  export let nodes = $storeNodes; // if you want a custom array of nodes
+  $: nodes = $storeNodes; // if you want a custom array of nodes
 
-  setInterval(() => {
-    $storeNodes.forEach((node) => {
-      node.sensors.forEach((s) => {
-        s.value += Math.floor((Math.random() - 0.5) * 100);
-        console.log(s.value);
-      });
-      node.lastUpdated = new Date();
-      node = node;
-    });
-  }, 5000);
-  $storeNodes = $storeNodes;
-  //   nodes.update(current => {
-  //     current.forEach((node) => {
-  //       //TODO: simulate dropout.
-  //       // if (Math.random() < .5) return;
-
-  //       node.simulate();
   //     });
-  //     return current;
   //   });
-  // }, 500);
 </script>
 
 <ul class="mt-6 text-primary-content">
