@@ -32,11 +32,6 @@
       class="textarea textarea-bordered rounded-none"
       bind:value={params.content}
     />
-    {#if test}
-      <button class="btn w-14" alt="insert?" on:click={test}
-        ><FaCompressArrowsAlt /></button
-      >
-    {/if}
   </label>
   <!-- <div class="indicator-item pt-6">
       <VariableInserter />

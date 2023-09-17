@@ -14,45 +14,51 @@
 <ul class="mt-6 text-primary-content">
   {#each nodes as node}
     <h2 class="text-base-content">
-      <a
+      <!-- <a
         href=""
         on:click={() => {
           $storeNodes.push(new Node("test", "secondary"));
         }}>add</a
-      >
-      <!-- <a href="/node?id={node.id}">{node.label}</a> -->
+      > -->
       <a
         href=""
         on:click={() => {
-          node.addSensor("CO2", "ppm", "co2", Co2Input);
+          setTimeout(() => {
+            node.addSensor("CO2", "ppm", "co2", Co2Input);
+          }, 5000);
         }}>{node.label}</a
       >
     </h2>
+    <!-- <a href="/node?id={node.id}">{node.label}</a> -->
     <li class="grid grid-cols-3 p-2 gap-2">
       {#if node.sensors[0]}
         <div
           transition:fade
           class="stat relative bg-{node.color} bg-contain bg-center bg-no-repeat rounded-xl col-span-2 h-32 p-4 "
           style="background-image: url(/line_graph.svg)"
+          on:click={() => {
+            //expand/popup a detail/browse view
+            detailVisible = !detailVisible;
+          }}
         >
-          <div class="stat-title absolute left-0 top-2 text-lg">
+          <div class="absolute left-2 top-2 text-lg">
             {node.sensors[0].label}
           </div>
           <div class="stat-value absolute right-2 top-2">
-            {Math.floor(node.sensors[0].value / 100)}<span
-              class="stat-desc text-lg">{node.sensors[0].unit}</span
+            {Math.floor(node.sensors[0].value / 100)}<span class="text-lg"
+              >{node.sensors[0].unit}</span
             >
           </div>
         </div>
       {/if}
       {#if node.sensors[2]}
         <div transition:fade class="stat bg-{node.color} rounded-xl h-32 p-4 ">
-          <div class="stat-title left-0 -mt-2 text-lg">
+          <div class="-mt-2 text-lg">
             {node.sensors[2].label}
           </div>
           <div class="stat-value">
             {Math.round(node.sensors[2].value / 100).toFixed(1)}<span
-              class="stat-desc text-lg">{node.sensors[2].unit}</span
+              class="text-lg">{node.sensors[2].unit}</span
             >
           </div>
         </div>
@@ -63,11 +69,11 @@
           class="stat relative bg-{node.color} bg-contain bg-bottom bg-no-repeat rounded-xl col-span-3 h-32 p-4 "
           style="background-image: url(/bar_graph.svg)"
         >
-          <div class="stat-title absolute left-0 top-2 text-lg">
+          <div class=" absolute left-2 top-2 text-lg">
             {node.sensors[1].label}
           </div>
           <div class="stat-value absolute right-2 top-2">
-            {node.sensors[1].value}<span class="stat-desc text-lg"
+            {node.sensors[1].value}<span class="text-lg"
               >{node.sensors[1].unit}</span
             >
           </div>
@@ -75,13 +81,12 @@
       {/if}
       {#if node.sensors[5]}
         <div transition:fade class="stat bg-{node.color} rounded-xl h-32 p-4">
-          <div class="stat-title left-0 -mt-2 text-lg">
+          <div class=" left-0 -mt-2 text-lg">
             {node.sensors[5].label}
           </div>
           <div class="stat-value">
-            {Math.round(node.sensors[5].value / 100).toFixed(0)}<span
-              class="stat-desc text-lg">{node.sensors[5].unit}</span
-            >
+            {Math.round(node.sensors[5].value / 100).toFixed(0)}
+            <div class="text-lg -mt-3">{node.sensors[5].unit}</div>
           </div>
         </div>
       {/if}

@@ -1,10 +1,9 @@
 <script>
   import { onMount } from "svelte";
-  //   import App from "src/App.svelte";
-  import Index from "./index.svelte";
 
   import { register } from "swiper/element/bundle";
   import Monitor from "@components/Monitor.svelte";
+  import Record from "@components/Record.svelte";
   import Rule from "./rule.svelte";
 
   // register Swiper custom elements
@@ -24,28 +23,33 @@
     class="text-3xl font-bold m-1"
     slides-per-view={3}
     centered-slides={true}
-    center-insufficient-slides={true}
+    center-insufficient-slides={false}
+    hash-navigation-watch-state={true}
   >
-    <swiper-slide class="swiper-slide-active">Monitor </swiper-slide>
-    <swiper-slide>Record</swiper-slide>
-    <swiper-slide>Notify</swiper-slide>
-    <swiper-slide>Automate</swiper-slide>
+    <swiper-slide class="swiper-slide-active" data-hash="monitor"
+      >Monitor</swiper-slide
+    >
+    <swiper-slide data-hash="record">Record</swiper-slide>
+    <swiper-slide data-hash="automate">Automate</swiper-slide>
+    <swiper-slide data-hash="notify">Notify</swiper-slide>
   </swiper-container>
 
   <swiper-container
     id="bodySwipe"
     slides-per-view={1}
     centered-slides={true}
-    center-insufficient-slides={true}
+    center-insufficient-slides={false}
+    hash-navigation={{ watchState: true }}
   >
-    <swiper-slide class="swiper-slide-active" lazy="true"
-      ><Monitor />
+    <swiper-slide class="swiper-slide-active" lazy="true">
+      <!-- <Rule /> -->
+      <Monitor />
     </swiper-slide>
     <swiper-slide lazy="true">
-      <img src="/record.png" />
+      <Record />
     </swiper-slide>
     <swiper-slide lazy="true">
-      <img src="/automate.png" />
+      <Rule />
     </swiper-slide>
     <swiper-slide lazy="true">
       <Rule />

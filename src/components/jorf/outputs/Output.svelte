@@ -10,10 +10,10 @@
 <Popdown>
   <div class="flex flex-wrap lg:flex-nowrap">
     <slot />
-    {#if test}
+    <!-- {#if test}
       <button class="btn btn-ghost w-14" alt="test" on:click={test}
         ><FaCogs /></button
       >
-    {/if}
+    {/if} -->
   </div>
 </Popdown>

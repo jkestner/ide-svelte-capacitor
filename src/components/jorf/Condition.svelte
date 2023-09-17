@@ -102,6 +102,7 @@
           key={expression.id}
           draggable
           bind:dragDisabled
+          class="bg-transparent"
         >
           <Expression {expression} isRoot />
         </RuleLine>
@@ -132,20 +133,24 @@
     grid-auto-rows: min-content;
   }
   .steps-vertical .step:before {
-    width: 0.25rem;
+    width: 0.125rem;
     --tw-translate-y: 0rem;
-    /* background-color: blue; */
+    background-color: hsl(var(--b3));
   }
   .steps-vertical .step:first-child:before {
-    /* height: calc(100% + 3rem); */
+    height: 100%;
     --tw-translate-y: 2rem;
-    /* background-color: red; */
     content: "";
   }
   .steps-vertical .step:last-child:before {
     --tw-translate-y: -2rem;
   }
+  .steps-vertical .step:only-child:before {
+    background-color: transparent;
+  }
+
   .steps .step:after {
+    border: solid 1px white;
     place-self: start center;
     margin-top: 1.25em;
   }

@@ -34,34 +34,14 @@
       component: RandomInput,
     },
     {
-      label: "Temperature",
+      label: "Weather. temperature",
       inputClass: "temperature",
       component: TemperatureInput,
     },
     {
-      label: "Humidity",
+      label: "Weather. humidity",
       inputClass: "humidity",
       component: HumidityInput,
-    },
-    {
-      label: "Light",
-      inputClass: "light",
-      component: LightInput,
-    },
-    {
-      label: "Button",
-      inputClass: "button",
-      component: ButtonInput,
-    },
-    {
-      label: "Pin",
-      inputClass: "pin",
-      component: GPInput,
-    },
-    {
-      label: "Battery",
-      inputClass: "battery",
-      component: BatteryInput,
     },
   ];
 
@@ -92,7 +72,7 @@
   }
 </script>
 
-<div class="flex flex-auto flex-wrap p-1 mb-2 {isRoot ? '' : 'ml-3'}">
+<div class="flex flex-auto {isRoot ? '' : 'ml-3'}">
   {#if expression.left.expr}
     <svelte:self expression={expression.left.expr} /><br />
     <OpPicker bind:expression bool />
@@ -103,8 +83,12 @@
       vocabulary={nodeInputs}
     /> -->
     <!-- <PartPicker bind:value={expression.left.value} vocabulary={nodeInputs} /> -->
-    <PartPalette bind:value={expression.left.value} vocabulary={nodeInputs} />
+    <PartPalette
+      bind:value={expression.left.value}
+      vocabulary={[...nodeInputs, ...inputs]}
+    />
     <OpPicker bind:expression />
+
     <!-- if that Literal equals a known input type, replace the rest with the input component. -->
     {#if expression.left.value && expression.left.value.component && selectedComponent(expression.left.value.component)}
       <!-- show the input component here -->

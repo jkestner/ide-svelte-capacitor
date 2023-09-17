@@ -152,7 +152,7 @@
       </div>
 
       <div
-        class="p-2 overflow-visible peer-hover:bg-primary peer-hover:bg-opacity-20"
+        class="p-2 overflow-visible peer-hover:bg-primary peer-hover:bg-opacity-20 text-left"
       >
         <h3 class="heading">when</h3>
         <div class="grid break-after-column">

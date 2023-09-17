@@ -36,6 +36,8 @@
   }
   function fullLabelFormatted(a) {
     let label = "";
+    if (typeof a === "string") return a;
+
     if (a.nodeName)
       label =
         '<span style="font-weight:300" class="mr-0 pr-0">@' +
@@ -50,17 +52,17 @@
 <div class="flex {$$props.class}" class:w-full={selected().component}>
   {#if palette}
     <div class="dropdown">
-      <label for="" tabindex="0" class="btn normal-case m-1"
+      <label tabindex="0" class="btn btn-primary normal-case mr-1"
         >{@html fullLabelFormatted(value)}</label
       >
-      <div tabindex="0" class="dropdown-content -mt-14">
+      <div tabindex="0" class="menu dropdown-content -mt-12">
         <input
-          class="input input-bordered w-full "
+          class="input input-bordered w-full rounded-b-none"
           type="text"
           value={fullLabel(value)}
         />
         <ul
-          class="menu p-2 shadow bg-base-100 rounded-box w-72 z-50 overflow-auto h-64"
+          class="p-2 shadow bg-base-100 rounded-box rounded-t-none w-72 z-50 overflow-auto h-64"
         >
           {#each vocabulary as a, i}
             <li style="font-weight: 600">
@@ -72,7 +74,7 @@
                 style="gap: 0"
                 class:active={isSelected(a)}
               >
-                {#if a.icon}
+                <!-- {#if a.icon}
                   {a.icon}
                 {:else}
                   <svg
@@ -88,7 +90,7 @@
                       d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                     /></svg
                   >
-                {/if}
+                {/if} -->
                 {@html fullLabelFormatted(a)}
               </div>
             </li>
@@ -99,7 +101,7 @@
   {:else}
     <div class="chooser flex items-baseline">
       <select
-        class="select bg-primary overflow-visible normal-case mr-1"
+        class="select bg-primary overflow-visible normal-case mr-1 w-44"
         bind
         placeholder="command"
         color="accent"

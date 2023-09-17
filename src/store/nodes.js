@@ -36,8 +36,8 @@ else {
       }
         this.addActuator("led");
         this.addActuator("pin");
-        if (Math.random() < .5)
-          this.addActuator("relay");
+        // if (Math.random() < .5)
+        //   this.addActuator("relay");
     }
 
     simulate() {
@@ -49,15 +49,28 @@ else {
     }
 
     addSensor(label, unit, inputClass, component) {
+      let val;
+      switch(inputClass) {
+        case "temperature":
+          val = Math.floor(Math.random()*200+550)*10;
+          break;
+        case "co2":
+          val = Math.floor(Math.random()*2000+4000)*10;
+          break;
+        default:
+          val = Math.floor(Math.random()*200+300)*10
+      }
+
       this.sensors.push({
         label: label,
-        value: Math.floor(Math.random()*400+100)*10,
+        value: val,
         unit: unit,
         inputClass: inputClass || label.toLowerCase(), //use this to dynamically load appropriate UI such as constraints for the possible values (i.e. slider with range)
         component: component || GpInput
       })
-    }
+  }
 
+  
     addActuator(label) {
       this.actuators.push({
         label: label,
@@ -80,4 +93,4 @@ setInterval(() => {
     });
     return current;
   });
-}, 5000);
+}, 1000);

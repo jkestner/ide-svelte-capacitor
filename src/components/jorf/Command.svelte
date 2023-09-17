@@ -6,11 +6,11 @@
   import EmailOutput from "./outputs/EmailOutput.svelte";
   import GPOutput from "./outputs/GPOutput.svelte";
   import LogOutput from "./outputs/LogOutput.svelte";
-  import TwitterOutput from "./outputs/TwitterOutput.svelte";
+  // import TwitterOutput from "./outputs/TwitterOutput.svelte";
   import SMSOutput from "./outputs/SMSOutput.svelte";
   import StateOutput from "./outputs/StateOutput.svelte";
   import HTTPOutput from "./outputs/HTTPOutput.svelte";
-  import MicroPythonOutput from "./outputs/MicroPythonOutput.svelte";
+  // import MicroPythonOutput from "./outputs/MicroPythonOutput.svelte";
   import MQTTOutput from "./outputs/MQTTOutput.svelte";
 
   const outputs = [
@@ -44,24 +44,24 @@
       level: "network",
       component: LogOutput,
     },
-    {
-      label: "Tweet",
-      value: "twitter",
-      level: "network",
-      component: TwitterOutput,
-    },
+    // {
+    //   label: "Tweet",
+    //   value: "twitter",
+    //   level: "network",
+    //   component: TwitterOutput,
+    // },
     {
       label: "Call URL",
       value: "httpout",
       level: "network",
       component: HTTPOutput,
     },
-    {
-      label: "Run MicroPython code",
-      value: "mpythonout",
-      level: "network",
-      component: MicroPythonOutput,
-    },
+    // {
+    //   label: "Run MicroPython code",
+    //   value: "mpythonout",
+    //   level: "network",
+    //   component: MicroPythonOutput,
+    // },
     {
       label: "Post to MQTT",
       value: "mqttout",
