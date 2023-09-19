@@ -4,14 +4,30 @@
 
   import Co2Input from "./jorf/inputs/Co2Input.svelte";
   import { fade } from "svelte/transition";
+  import MonitorDetail from "./MonitorDetail.svelte";
 
   $: nodes = $storeNodes; // if you want a custom array of nodes
 
-  //     });
-  //   });
+  let detailVisible = false;
 </script>
 
-<ul class="mt-6 text-primary-content">
+<ul class="mt-2 text-primary-content">
+  {#if detailVisible}
+    <div class="absolute z-30 w-full h-full bg-base-100">
+      <div class="m-2 text-left">
+        <a
+          href=""
+          on:click={() => {
+            detailVisible = !detailVisible;
+          }}
+          >&lt; back
+        </a>
+      </div>
+
+      <MonitorDetail />
+    </div>
+  {/if}
+
   {#each nodes as node}
     <h2 class="text-base-content">
       <!-- <a
@@ -37,7 +53,6 @@
           class="stat relative bg-{node.color} bg-contain bg-center bg-no-repeat rounded-xl col-span-2 h-32 p-4 "
           style="background-image: url(/line_graph.svg)"
           on:click={() => {
-            //expand/popup a detail/browse view
             detailVisible = !detailVisible;
           }}
         >

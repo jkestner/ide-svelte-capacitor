@@ -30,7 +30,7 @@
       /> minutes record:
     </h2>
 
-    <table class="table table-zebra">
+    <table class="table table-zebra w-full">
       <thead>
         <tr>
           <th>Date</th>

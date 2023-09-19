@@ -23,7 +23,7 @@
     />
   </label>
   <label class="input-group ml-2 mb-2">
-    <span>topic</span>
+    <span>Topic</span>
     <input
       type="text"
       placeholder="#home"
